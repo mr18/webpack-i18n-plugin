@@ -1,10 +1,10 @@
 const qs = require("querystring");
 const isPitcher = (l) => l.path !== __filename;
 const isNullLoader = (l) => /(\/|\\|@)null-loader/.test(l.path);
-const loaderPath = require.resolve("./loader.js");
+const loaderPath = require.resolve("./i18n-loader.js");
 
 module.exports = function (source) {
-  // console.log(source);
+  console.log(source);
   return source;
 };
 
@@ -16,7 +16,8 @@ module.exports.pitch = function (remainingRequest) {
   let loaders = this.loaders;
   // remove self
   loaders = loaders.filter(isPitcher);
-
+  console.log(loaders);
+  console.log(this.loaders);
   // do not inject if user uses null-loader to void the type (#1239)
   if (loaders.some(isNullLoader)) {
     return;
@@ -50,6 +51,7 @@ module.exports.pitch = function (remainingRequest) {
 
   let prePitcher = options.prePitcher;
   let prePitcherLoader = require(prePitcher.loader);
+
   let request = prePitcherLoader.pitch.call({ ...this, loaders }, remainingRequest);
   if (query.type === "template") {
     const newRequest = genRequest([loaderPath], request);
@@ -61,6 +63,6 @@ module.exports.pitch = function (remainingRequest) {
     console.log(remainingRequest);
   }
 
-  // console.log(request);
+  console.log(request);
   return request;
 };

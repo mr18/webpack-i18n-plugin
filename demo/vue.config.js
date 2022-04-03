@@ -9,7 +9,7 @@ module.exports = defineConfig({
       .use(i18nPlugin)
       .after("vue-loader")
       .tap((options) => {
-        return [i18nConfig];
+        return [...options, i18nConfig];
       });
   },
 });

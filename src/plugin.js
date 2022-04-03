@@ -12,7 +12,7 @@ class i18nPlugin {
 
     // 针对vue中template的pitcher，拦截处理
     rules.forEach((item, index) => {
-      if (!prePitcher && typeof item.loader === "string" && /vue-loader/.test(item.loader) && /pitcher/.test(item.loader)) {
+      if (!prePitcher && typeof item.loader === "string" && /vue-loader/.test(item.loader) && /pitcher/.test(item.loader) && !/i18n-loader/.test(item.loader)) {
         pitchIndex = index;
         prePitcher = item;
       }
