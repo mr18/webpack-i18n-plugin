@@ -6,8 +6,8 @@ module.exports = defineConfig({
   chainWebpack: (config) => {
     config
       .plugin("i18n")
-      .after("vue-loader")
       .use(i18nPlugin)
+      .after("vue-loader")
       .tap((options) => {
         return [i18nConfig];
       });

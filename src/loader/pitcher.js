@@ -1,7 +1,7 @@
 const qs = require("querystring");
 const isPitcher = (l) => l.path !== __filename;
 const isNullLoader = (l) => /(\/|\\|@)null-loader/.test(l.path);
-const loaderPath = require.resolve("./loader");
+const loaderPath = require.resolve("./loader.js");
 
 module.exports = function (source) {
   // console.log(source);
@@ -56,19 +56,11 @@ module.exports.pitch = function (remainingRequest) {
 
     // the template compiler uses esm exports
     console.log(`export * from ${newRequest}`);
-    // return `export * from ${newRequest}`;
+    return `export * from ${newRequest}`;
   } else if (query.type === "script") {
     console.log(remainingRequest);
   }
 
   // console.log(request);
   return request;
-
-  // loader: 'E:\\private\\vue-demo\\node_modules\\@vue\\vue-loader-v15\\lib\\loaders\\pitcher.js',
-  // resourceQuery: [Function: resourceQuery],
-  // options: { cacheDirectory: undefined, cacheIdentifier: undefined }
-  //   console.log(options);
-  //  loader: 'E:\\private\\vue-demo\\node_modules\\@vue\\vue-loader-v15\\lib\\loaders\\pitcher.js',
-  // resourceQuery: [Function: resourceQuery],
-  // options: { cacheDirectory: undefined, cacheIdentifier: undefined }
 };
