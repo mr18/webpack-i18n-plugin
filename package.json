@@ -1,43 +1,23 @@
 {
-  "name": "vue-demo",
-  "version": "0.1.0",
-  "private": true,
+  "name": "i18n-webpack-plugin",
+  "version": "1.0.0",
+  "description": "vue项目，webpack国际化插件",
+  "main": "index.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mr18/i18n-webpack-plugin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mr18/i18n-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/mr18/i18n-webpack-plugin#readme",
   "dependencies": {
-    "core-js": "^3.8.3",
-    "vue": "^2.6.14"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "vue-template-compiler": "^2.6.14"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "ora": "^1.4.0",
+    "xlsx": "^0.18.5"
+  }
 }

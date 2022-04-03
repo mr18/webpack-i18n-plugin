@@ -1,0 +1,8 @@
+.idea
+.vscode
+demo/dist
+node_modules
+locale/compile
+test/output
+package-lock.json
+
