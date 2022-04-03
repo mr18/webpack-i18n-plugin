@@ -1,2 +1,1 @@
-# vue-i18n-plugin
-vue项目，webpack国际化插件
+# 中文国际化插件，适用 vue，react
