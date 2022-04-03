@@ -1,2 +1,2 @@
-# webpack-i18n-plugin
-vue、react项目，webpack国际化插件
+# vue-i18n-plugin
+vue项目，webpack国际化插件
