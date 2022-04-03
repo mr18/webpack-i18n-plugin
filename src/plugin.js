@@ -8,8 +8,9 @@ class i18nPlugin {
   }
   apply(compiler) {
     let module = (compiler.options || {}).module || {};
-    let rules = module.rules || [];
     let pitchIndex, prePitcher;
+    let rules = module.rules || [];
+
     // 针对vue中template的pitcher，拦截处理
     rules.forEach((item, index) => {
       if (pitchIndex === undefined && typeof item.loader === "string" && /vue-loader/.test(item.loader) && /pitcher/.test(item.loader)) {
@@ -21,18 +22,17 @@ class i18nPlugin {
     });
 
     if (prePitcher) {
-      rules.splice(pitchIndex, 1, {
-        ...prePitcher,
-        loader: path.resolve(__dirname, "./pitcher.js"),
-        resourceQuery: prePitcher.resourceQuery,
-        options: {
-          ...(prePitcher.options || {}),
-          prePitcher,
-        },
-      });
+      // rules.splice(pitchIndex, 1, {
+      //   ...prePitcher,
+      //   loader: path.resolve(__dirname, "./loader/pitcher.js"),
+      //   options: {
+      //     ...(prePitcher.options || {}),
+      //     prePitcher,
+      //   },
+      // });
     }
     module.rules = rules;
-
+    // console.log(compiler.options.module.rules);
     compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
       i18n(this.i18nConfig);
     });

@@ -1,9 +1,7 @@
 const qs = require("querystring");
-const loaderUtils = require("loader-utils");
 const isPitcher = (l) => l.path !== __filename;
 const isNullLoader = (l) => /(\/|\\|@)null-loader/.test(l.path);
 const loaderPath = require.resolve("./loader");
-const templateLoaderPath = require.resolve("@vue/vue-loader-v15/lib/loaders/templateLoader.js");
 
 module.exports = function (source) {
   // console.log(source);
@@ -11,7 +9,8 @@ module.exports = function (source) {
 };
 
 module.exports.pitch = function (remainingRequest) {
-  const options = loaderUtils.getOptions(this);
+  const options = this.getOptions(this);
+  console.log(options);
   const { cacheDirectory, cacheIdentifier } = options;
   const query = qs.parse(this.resourceQuery.slice(1));
   let loaders = this.loaders;
@@ -22,7 +21,7 @@ module.exports.pitch = function (remainingRequest) {
   if (loaders.some(isNullLoader)) {
     return;
   }
-  const genRequest = (loaders) => {
+  const genRequest = (loaders, request) => {
     // Important: dedupe since both the original rule
     // and the cloned rule would match a source import request.
     // also make sure to dedupe based on loader path.
@@ -44,33 +43,20 @@ module.exports.pitch = function (remainingRequest) {
         loaderStrings.push(request);
       }
     });
+    let loadRequest = request.replace(/[\'\"]$/, "").split("-!");
 
-    return loaderUtils.stringifyRequest(this, "-!" + [...loaderStrings, this.resourcePath + this.resourceQuery].join("!"));
+    return loaderUtils.stringifyRequest(this, "-!" + [...loaderStrings, loadRequest[1]].join("!"));
   };
 
   let prePitcher = options.prePitcher;
   let prePitcherLoader = require(prePitcher.loader);
   let request = prePitcherLoader.pitch.call({ ...this, loaders }, remainingRequest);
   if (query.type === "template") {
-    const path = require("path");
-    const cacheLoader =
-      cacheDirectory && cacheIdentifier
-        ? [
-            `${require.resolve("cache-loader")}?${JSON.stringify({
-              // For some reason, webpack fails to generate consistent hash if we
-              // use absolute paths here, even though the path is only used in a
-              // comment. For now we have to ensure cacheDirectory is a relative path.
-              cacheDirectory: (path.isAbsolute(cacheDirectory) ? path.relative(process.cwd(), cacheDirectory) : cacheDirectory).replace(/\\/g, "/"),
-              cacheIdentifier: hash(cacheIdentifier) + "-vue-loader-template",
-            })}`,
-          ]
-        : [];
-
-    const newRequest = genRequest([...cacheLoader, loaderPath, templateLoaderPath + `??vue-loader-options`]);
+    const newRequest = genRequest([loaderPath], request);
 
     // the template compiler uses esm exports
-
-    return `export * from ${newRequest}`;
+    console.log(`export * from ${newRequest}`);
+    // return `export * from ${newRequest}`;
   } else if (query.type === "script") {
     console.log(remainingRequest);
   }

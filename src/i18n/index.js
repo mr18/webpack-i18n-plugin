@@ -18,7 +18,7 @@ const gen = require("./gen");
 function genConfigFile(opt) {
   myOra.info("国际化配置生成中");
   let options = opt;
-
+  console.log(options);
   let keysMap = loaderUtils.getKeysMap(),
     oldKeysMap = {},
     hasLocalFlie = false;
