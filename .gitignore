@@ -2,7 +2,6 @@
 .vscode
 demo/dist
 node_modules
-locale/compile
-test/output
+demo/**/i18n
 package-lock.json
 

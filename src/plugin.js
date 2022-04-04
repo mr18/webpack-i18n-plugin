@@ -1,5 +1,5 @@
 const path = require("path");
-const i18n = require("./i18n");
+const collector = require("./collector");
 class i18nPlugin {
   constructor(config) {
     this.i18nConfig = config;
@@ -25,11 +25,10 @@ class i18nPlugin {
         },
       };
       rules.splice(pitchIndex, 1, i18nPitcher);
+      (compiler.options.module || {}).rules = rules;
     }
-    (compiler.options.module || {}).rules = rules;
-
     compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
-      i18n(this.i18nConfig);
+      collector(this.i18nConfig);
     });
   }
 }

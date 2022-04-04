@@ -8,25 +8,13 @@ module.exports = defineConfig({
     config
       .plugin("i18n")
       .use(i18nPlugin)
-      .after("vue-loader")
       .tap((options) => {
         return [...options, i18nConfig];
       });
-    // console.log(1);
-    // config.module.rule("vue").use("vue-loader").loader("vue-loader").loader(path.resolve(__dirname, "./loader.js"));
-    // .tap((option) => {
-    //   // option.postLoaders = {
-    //   //   html: path.resolve(__dirname, "./loader.js"),
-    //   //   js: path.resolve(__dirname, "./loader.js"),
-    //   // };
-    //   return option;
-    // });
-    // .merge({
-    //   resourceQuery: function (query) {
-    //     // console.log(query);
-    //     return false;
-    //   },
-    //   loader: "./loader.js",
-    // });
+    config.module
+      .rule("i18n")
+      .test(/\.(t|j)sx?$/)
+      .use("i18n-loader")
+      .loader(require.resolve("../../../i18n-webpack-loader"));
   },
 });

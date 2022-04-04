@@ -8,8 +8,7 @@ module.exports = function (source) {
 };
 
 module.exports.pitch = function (remainingRequest) {
-  const options = loaderUtils.getOptions(this);
-  const { cacheDirectory, cacheIdentifier } = options;
+  const options = loaderUtils.getOptions(this) || {};
   const query = qs.parse(this.resourceQuery.slice(1));
   let loaders = this.loaders;
   // remove self

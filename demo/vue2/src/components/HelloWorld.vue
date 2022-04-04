@@ -15,6 +15,7 @@ export default {
   props: {
     msg: String,
   },
+  aa: "擦ACA",
 };
 </script>
 
