@@ -6,6 +6,7 @@ const i18nConfig = require("./i18n.config");
 let entry = {
   index: path.resolve(__dirname, "./src/index.js"),
   xxx: path.resolve(__dirname, "./src/index.js"),
+  asas: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./src/test.tsx")],
   sd3: path.resolve(__dirname, "./src/index.js"),
 };
 module.exports = {

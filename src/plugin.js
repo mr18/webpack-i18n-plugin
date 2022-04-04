@@ -5,6 +5,7 @@ class i18nPlugin {
     this.i18nConfig = config;
   }
   apply(compiler) {
+    console.log(compiler.options.entry);
     let rules = (compiler.options.module || {}).rules;
     let pitchIndex, prePitcher;
     rules.forEach((item, index) => {

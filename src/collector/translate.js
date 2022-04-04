@@ -1,5 +1,4 @@
-const fileUtils = require("./fs-utils");
-const genUtils = require("./gen-utils");
+const utils = require("./utils");
 const XLSX = require("xlsx");
 const path = require("path");
 const ora = require("ora");
@@ -11,7 +10,7 @@ const myOra = ora();
  * @param options
  * @param oldKeysMap
  */
-module.exports.genTranslateFile = function (options, oldKeysMap) {
+module.exports = function genTranslateFile(options, oldKeysMap) {
   let tranKeys = Object.keys(options.translation || {});
   if (tranKeys && tranKeys.length) {
     myOra.info("翻译文件生成中");
@@ -62,7 +61,7 @@ module.exports.genTranslateFile = function (options, oldKeysMap) {
       });
       let localeCode = "module.exports = " + JSON.stringify(localeResult);
       let tranPath = path.resolve(options.outputPath, "./" + key + "/locale.js");
-      fileUtils.writeFile(tranPath, localeCode);
+      utils.writeFile(tranPath, localeCode);
 
       myOra.succeed(key + " 语言包文件生成成功");
 
@@ -71,16 +70,16 @@ module.exports.genTranslateFile = function (options, oldKeysMap) {
       if (xlsxData.length) {
         myOra.info(xlsxData.length + "条待翻译");
 
-        let buf = genUtils.genXLSXData(xlsxData);
-        fileUtils.writeFile(outputXlsxPath, buf);
-        fileUtils.writeFile(outputJsonPath, JSON.stringify(jsonData));
+        let buf = utils.genXLSXData(xlsxData);
+        utils.writeFile(outputXlsxPath, buf);
+        utils.writeFile(outputJsonPath, JSON.stringify(jsonData));
 
         myOra.info("待翻译文件保存目录：");
         myOra.info(" > " + outputXlsxPath);
         myOra.info(" > " + outputJsonPath);
       } else {
-        fileUtils.deleteFile(outputXlsxPath);
-        fileUtils.deleteFile(outputJsonPath);
+        utils.deleteFile(outputXlsxPath);
+        utils.deleteFile(outputJsonPath);
       }
     });
   }

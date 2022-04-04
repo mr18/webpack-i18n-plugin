@@ -1,13 +1,10 @@
-const babel = require("@babel/core");
-const fileUtils = require("./fs-utils");
-const genUtils = require("./gen-utils");
-const plugin = require("../plugin");
-const loaderUtils = require("i18n-webpack-loader").utils;
+const utils = require("./utils");
+const i18nUtils = require("i18n-webpack-loader").utils;
 const path = require("path");
 const ora = require("ora");
 const fs = require("fs");
 const myOra = ora();
-const gen = require("./gen");
+const translate = require("./translate");
 
 /**
  *
@@ -19,7 +16,7 @@ function genConfigFile(opt) {
     ...opt,
   };
   myOra.info("国际化配置生成中");
-  let keysMap = loaderUtils.getKeysMap(),
+  let keysMap = i18nUtils.getKeysMap(),
     oldKeysMap = {},
     hasLocalFlie = false;
   let localeFilePath = path.resolve(options.outputPath, "./zh_CN/locale.js");
@@ -55,24 +52,24 @@ function genConfigFile(opt) {
     };
   });
 
-  let version = loaderUtils.genUuidKey(JSON.stringify(keysMap), "v_");
-  let i18nPolyfillCode = genUtils.genPolyfill(version);
-  fileUtils.writeFile(path.resolve(options.outputPath, "./localePolyfill.js"), i18nPolyfillCode);
+  let version = i18nUtils.genUuidKey(JSON.stringify(keysMap), "v_");
+  let i18nPolyfillCode = utils.genPolyfill(version);
+  utils.writeFile(path.resolve(options.outputPath, "./localePolyfill.js"), i18nPolyfillCode);
 
-  let i18nPolyfillTsCode = genUtils.genPolyfillTs();
-  fileUtils.writeFile(path.resolve(options.outputPath, "./localePolyfill.d.ts"), i18nPolyfillTsCode);
+  let i18nPolyfillTsCode = utils.genPolyfillTs();
+  utils.writeFile(path.resolve(options.outputPath, "./localePolyfill.d.ts"), i18nPolyfillTsCode);
 
   myOra.succeed("localePolyfill.js 生成完毕");
 
   let localeCode = "module.exports = " + JSON.stringify(sortKeysMap);
-  fileUtils.writeFile(path.resolve(options.outputPath, "./zh_CN/locale.js"), localeCode);
+  utils.writeFile(path.resolve(options.outputPath, "./zh_CN/locale.js"), localeCode);
 
-  let buf = genUtils.genXLSXData(xlsxData);
-  fileUtils.writeFile(path.resolve(options.outputPath, "./zh_CN/国际化语言包.xlsx"), buf);
+  let buf = utils.genXLSXData(xlsxData);
+  utils.writeFile(path.resolve(options.outputPath, "./zh_CN/国际化语言包.xlsx"), buf);
 
   myOra.succeed("zh_CN 语言包文件生成成功");
 
-  gen.genTranslateFile(options, hasLocalFlie ? oldKeysMap : sortKeysMap);
+  translate(options, hasLocalFlie ? oldKeysMap : sortKeysMap);
 
   myOra.succeed("国际化配置及语言包文件生成完毕");
 }

@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-
+const XLSX = require("xlsx");
 /**
  *
  * @param filePath
@@ -28,12 +28,13 @@ module.exports.getFileList = function (filePath, list) {
  *
  * @param filePath
  */
-module.exports.readCodeText = (filePath) => {
+const readCodeText = function (filePath) {
   let filePathStr = path.resolve(filePath);
   let text = fs.readFileSync(filePathStr, "utf-8");
 
   return text;
 };
+module.exports.readCodeText = readCodeText;
 /**
  *
  * @param filePath
@@ -80,4 +81,34 @@ module.exports.deleteFile = (filePath) => {
       fs.unlinkSync(filePath);
     }
   }
+};
+
+/**
+ *
+ * @param version
+ * @returns {string|*|XML|void}
+ */
+module.exports.genPolyfill = function (version) {
+  return readCodeText(path.resolve(__dirname, "./tplCode/polyfill.js")).replace("${version}", version);
+};
+
+/**
+ *
+ * @param version
+ * @returns {string|*|XML|void}
+ */
+module.exports.genPolyfillTs = function () {
+  return readCodeText(path.resolve(__dirname, "./tplCode/polyfill.d.ts"));
+};
+
+/**
+ *
+ * @param data
+ * @returns {Number|*}
+ */
+module.exports.genXLSXData = function (data) {
+  let ws = XLSX.utils.json_to_sheet(data);
+  let wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Sheet");
+  return XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
 };
