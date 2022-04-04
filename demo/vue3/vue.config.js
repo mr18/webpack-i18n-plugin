@@ -12,6 +12,7 @@ module.exports = defineConfig({
       .tap((options) => {
         return [...options, i18nConfig];
       });
+
     config.module
       .rule("i18n")
       .test(/\.(t|j)sx?$/)

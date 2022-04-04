@@ -29,9 +29,7 @@ module.exports = {
       // loader 用于编译国际化代码
       {
         test: /\.(j|t)sx?$/,
-        // loader: "../../../../i18n-webpack-loader",
         loader: "webpack-i18n-plugin/loader",
-        // loader: require.resolve("../../../src/i18n-loader"),
         exclude: /node_modules/,
       },
       // 注意loader顺序，babel-loader 需在 ts-loader 前面，否则会造成插件功能会被ts-loader覆盖
