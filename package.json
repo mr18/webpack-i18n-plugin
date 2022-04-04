@@ -1,7 +1,17 @@
 {
   "name": "webpack-i18n-plugin",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "description": "webpack国际化插件",
+  "keywords": [
+    "vue",
+    "react",
+    "babel",
+    "i18n-plugin",
+    "i18n-loader",
+    "webpack-plugin",
+    "webpack",
+    "国际化"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,7 +28,7 @@
   "homepage": "https://github.com/mr18/webpack-i18n-plugin#readme",
   "dependencies": {
     "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.0.0-beta.32",
+    "@babel/core": "^7.17.8",
     "@babel/types": "^7.17.0",
     "loader-utils": "^1.4.0",
     "ora": "^1.4.0",
