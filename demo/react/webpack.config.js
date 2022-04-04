@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const i18nPlugin = require("webpack-i18n-plugin");
+const i18nPlugin = require("../../index");
+// const i18nPlugin = require("webpack-i18n-plugin");
 const i18nConfig = require("./i18n.config");
 
 let entry = {
@@ -30,8 +31,10 @@ module.exports = {
       // loader 用于编译国际化代码
       {
         test: /\.(j|t)sx?$/,
-        loader: "../../../i18n-webpack-loader",
-        exclude: /node_modules|locale/,
+        // loader: "i18n-webpack-loader",
+        // loader: require.resolve("../../../i18n-webpack-loader"),
+        loader: require.resolve("../../src/i18n-loader"),
+        exclude: /node_modules/,
       },
       // 注意loader顺序，babel-loader 需在 ts-loader 前面，否则会造成插件功能会被ts-loader覆盖
       {

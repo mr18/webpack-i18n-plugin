@@ -1,8 +1,14 @@
 const { defineConfig } = require("@vue/cli-service");
-const i18nPlugin = require("webpack-i18n-plugin");
+let i18nPlugin = require("../../../index");
+// const i18nPlugin = require("webpack-i18n-plugin");
 let i18nConfig = require("./i18n.config");
 
 module.exports = {
+  configureWebpack: {
+    resolveLoader: {
+      modules: ["node_modules"],
+    },
+  },
   chainWebpack: (config) => {
     config
       .plugin("i18n")
@@ -13,7 +19,9 @@ module.exports = {
     config.module
       .rule("i18n")
       .test(/\.(t|j)sx?$/)
-      .use("i18n-loader")
-      .loader(require.resolve("../../../../i18n-webpack-loader"));
+      .use("i18n-webpack-loader")
+      // .loader(require.resolve("../../../../i18n-webpack-loader"));
+      // .loader(require.resolve("../../../src/i18n-loader"));
+      .loader("i18n-webpack-loader");
   },
 };

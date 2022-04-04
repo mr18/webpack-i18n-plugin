@@ -1,11 +1,18 @@
+const { type } = require("os");
 const path = require("path");
 const collector = require("./collector");
+// const polyfilePath = require.resolve("./collector/tplCode/polyfill.js");
 class i18nPlugin {
   constructor(config) {
     this.i18nConfig = config;
   }
   apply(compiler) {
-    console.log(compiler.options.entry);
+    // let entries = compiler.options.entry;
+    // Object.keys(entries).forEach((key) => {
+    //   if (typeof entries[key] == "string") {
+    //   }
+    // });
+
     let rules = (compiler.options.module || {}).rules;
     let pitchIndex, prePitcher;
     rules.forEach((item, index) => {

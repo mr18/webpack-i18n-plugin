@@ -14,7 +14,9 @@ module.exports = defineConfig({
     config.module
       .rule("i18n")
       .test(/\.(t|j)sx?$/)
-      .use("i18n-loader")
+      .use("i18n-webpack-loader")
       .loader(require.resolve("../../../i18n-webpack-loader"));
+    // .loader(require.resolve("../../src/i18n-loader"));
+    // .loader("i18n-webpack-loader");
   },
 });
