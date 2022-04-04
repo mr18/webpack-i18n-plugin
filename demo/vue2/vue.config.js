@@ -1,5 +1,5 @@
 const { defineConfig } = require("@vue/cli-service");
-let i18nPlugin = require("../../index");
+const i18nPlugin = require("webpack-i18n-plugin");
 let i18nConfig = require("./i18n.config");
 
 module.exports = defineConfig({

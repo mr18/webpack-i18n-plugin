@@ -1,7 +1,7 @@
 {
   "name": "webpack-i18n-plugin",
-  "version": "0.8.1",
-  "description": "vue项目，webpack国际化插件",
+  "version": "0.8.2",
+  "description": "webpack国际化插件",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,6 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const i18nPlugin = require("../../index");
+const i18nPlugin = require("webpack-i18n-plugin");
 const i18nConfig = require("./i18n.config");
 
 let entry = {
