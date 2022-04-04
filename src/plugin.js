@@ -7,11 +7,12 @@ class i18nPlugin {
     this.i18nConfig = config;
   }
   apply(compiler) {
-    // let entries = compiler.options.entry;
-    // Object.keys(entries).forEach((key) => {
-    //   if (typeof entries[key] == "string") {
-    //   }
-    // });
+    let entries = compiler.options.entry;
+    console.log(entries);
+    Object.keys(entries).forEach((key) => {
+      if (typeof entries[key] == "string") {
+      }
+    });
 
     let rules = (compiler.options.module || {}).rules;
     let pitchIndex, prePitcher;
@@ -32,7 +33,7 @@ class i18nPlugin {
           prePitcher,
         },
       };
-      // rules.splice(pitchIndex, 1, i18nPitcher);
+      rules.splice(pitchIndex, 1, i18nPitcher);
       (compiler.options.module || {}).rules = rules;
     }
     compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
