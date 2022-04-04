@@ -39,7 +39,7 @@ module.exports.pitch = function (remainingRequest) {
         loaderStrings.push(request);
       }
     });
-    let loadRequest = request.replace(/[\'\"]$/, "").split("-!");
+    let loadRequest = request.replace(/\\['"]+/g, '"').split("-!");
 
     return loaderUtils.stringifyRequest(this, "-!" + [...loaderStrings, loadRequest[1]].join("!"));
   };
@@ -48,13 +48,17 @@ module.exports.pitch = function (remainingRequest) {
   let prePitcherLoader = require(prePitcher.loader);
 
   let request = prePitcherLoader.pitch.call({ ...this, loaders }, remainingRequest);
+
   if (query.type === "template") {
     const newRequest = genRequest([loaderPath], request);
 
     // the template compiler uses esm exports
-    return `export * from ${newRequest}`;
-  } else if (query.type === "script") {
-    // console.log(remainingRequest);
+    let exportStr = `export * from ${newRequest}`;
+    // console.log("\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    // console.log(request);
+    // console.log("\n==================================================================================");
+    // console.log(exportStr);
+    return exportStr;
   }
 
   return request;
