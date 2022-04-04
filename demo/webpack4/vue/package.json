@@ -18,9 +18,8 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "i18n-webpack-loader": "^0.8.2",
     "vue-template-compiler": "^2.6.10",
-    "webpack-i18n-plugin": "^0.8.2"
+    "webpack-i18n-plugin": "^0.8.3"
   },
   "eslintConfig": {
     "root": true,

@@ -1,6 +1,6 @@
 {
   "name": "webpack-i18n-plugin",
-  "version": "0.8.2",
+  "version": "0.8.4",
   "description": "webpack国际化插件",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,6 @@
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.0.0-beta.32",
     "@babel/types": "^7.17.0",
-    "i18n-webpack-loader": "^0.8.2",
     "loader-utils": "^1.4.0",
     "ora": "^1.4.0",
     "xlsx": "^0.18.5"

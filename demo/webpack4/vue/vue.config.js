@@ -16,7 +16,7 @@ module.exports = {
       .use("i18n-webpack-loader")
       // .loader(require.resolve("../../../../i18n-webpack-loader"));
       // .loader(require.resolve("../../../src/i18n-loader"));
-      .loader("i18n-webpack-loader");
+      .loader("webpack-i18n-plugin/loader");
     //
     //
     //

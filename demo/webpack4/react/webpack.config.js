@@ -30,7 +30,7 @@ module.exports = {
       {
         test: /\.(j|t)sx?$/,
         // loader: "../../../../i18n-webpack-loader",
-        loader: "i18n-webpack-loader",
+        loader: "webpack-i18n-plugin/loader",
         // loader: require.resolve("../../../src/i18n-loader"),
         exclude: /node_modules/,
       },
