@@ -1,6 +1,6 @@
 {
   "name": "i18n-webpack-plugin",
-  "version": "1.0.0",
+  "version": "0.8.1",
   "description": "vue项目，webpack国际化插件",
   "main": "index.js",
   "scripts": {
