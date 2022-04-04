@@ -12,9 +12,7 @@ let entry = {
 module.exports = {
   mode: "production",
   entry: Object.keys(entry).reduce((acc, cur) => {
-    acc[cur] = [
-      // path.resolve(__dirname, "./locale/localePolyfill.js")
-    ].concat(entry[cur]);
+    acc[cur] = [].concat(entry[cur]);
     return acc;
   }, {}),
 
@@ -31,9 +29,7 @@ module.exports = {
       // loader 用于编译国际化代码
       {
         test: /\.(j|t)sx?$/,
-        // loader: "i18n-webpack-loader",
-        // loader: require.resolve("../../../i18n-webpack-loader"),
-        loader: require.resolve("../../src/i18n-loader"),
+        loader: "i18n-webpack-loader",
         exclude: /node_modules/,
       },
       // 注意loader顺序，babel-loader 需在 ts-loader 前面，否则会造成插件功能会被ts-loader覆盖

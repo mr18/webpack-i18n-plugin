@@ -60,13 +60,13 @@ module.exports = function genTranslateFile(options, oldKeysMap) {
         }
       });
       let localeCode = "module.exports = " + JSON.stringify(localeResult);
-      let tranPath = path.resolve(options.outputPath, "./" + key + "/locale.js");
+      let tranPath = path.resolve(options.i18nDir, "./" + key + "/locale.js");
       utils.writeFile(tranPath, localeCode);
 
       myOra.succeed(key + " 语言包文件生成成功");
 
-      let outputXlsxPath = path.resolve(options.outputPath, "./" + key + "/待翻译内容.xlsx");
-      let outputJsonPath = path.resolve(options.outputPath, "./" + key + "/待翻译内容.json");
+      let outputXlsxPath = path.resolve(options.i18nDir, "./" + key + "/待翻译内容.xlsx");
+      let outputJsonPath = path.resolve(options.i18nDir, "./" + key + "/待翻译内容.json");
       if (xlsxData.length) {
         myOra.info(xlsxData.length + "条待翻译");
 

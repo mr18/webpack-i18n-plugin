@@ -3,7 +3,6 @@ const path = require("path");
 module.exports = {
   //国际化配置输出目录
   // outputPath: path.resolve(__dirname, "./i18n"),
-
   translation: {
     // en_US 语言包目录
     en_US: {

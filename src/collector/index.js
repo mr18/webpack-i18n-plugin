@@ -1,5 +1,5 @@
 const utils = require("./utils");
-const i18nUtils = require("i18n-webpack-loader").utils;
+const i18nUtils = require("../loader/utils");
 const path = require("path");
 const ora = require("ora");
 const fs = require("fs");
@@ -12,14 +12,14 @@ const translate = require("./translate");
  */
 function genConfigFile(opt) {
   let options = {
-    outputPath: path.resolve(process.cwd(), "./i18n"),
+    i18nDir: path.resolve(process.cwd(), "./i18n"),
     ...opt,
   };
   myOra.info("国际化配置生成中");
   let keysMap = i18nUtils.getKeysMap(),
     oldKeysMap = {},
     hasLocalFlie = false;
-  let localeFilePath = path.resolve(options.outputPath, "./zh_CN/locale.js");
+  let localeFilePath = path.resolve(options.i18nDir, "./zh_CN/locale.js");
   if (fs.existsSync(localeFilePath)) {
     hasLocalFlie = true;
     oldKeysMap = require(localeFilePath);
@@ -54,18 +54,18 @@ function genConfigFile(opt) {
 
   let version = i18nUtils.genUuidKey(JSON.stringify(keysMap), "v_");
   let i18nPolyfillCode = utils.genPolyfill(version);
-  utils.writeFile(path.resolve(options.outputPath, "./localePolyfill.js"), i18nPolyfillCode);
+  utils.writeFile(path.resolve(options.i18nDir, "./localePolyfill.js"), i18nPolyfillCode);
 
   let i18nPolyfillTsCode = utils.genPolyfillTs();
-  utils.writeFile(path.resolve(options.outputPath, "./localePolyfill.d.ts"), i18nPolyfillTsCode);
+  utils.writeFile(path.resolve(options.i18nDir, "./localePolyfill.d.ts"), i18nPolyfillTsCode);
 
   myOra.succeed("localePolyfill.js 生成完毕");
 
   let localeCode = "module.exports = " + JSON.stringify(sortKeysMap);
-  utils.writeFile(path.resolve(options.outputPath, "./zh_CN/locale.js"), localeCode);
+  utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/locale.js"), localeCode);
 
   let buf = utils.genXLSXData(xlsxData);
-  utils.writeFile(path.resolve(options.outputPath, "./zh_CN/国际化语言包.xlsx"), buf);
+  utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/国际化语言包.xlsx"), buf);
 
   myOra.succeed("zh_CN 语言包文件生成成功");
 
