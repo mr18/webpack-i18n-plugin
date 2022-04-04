@@ -32,7 +32,7 @@ class i18nPlugin {
           prePitcher,
         },
       };
-      rules.splice(pitchIndex, 1, i18nPitcher);
+      // rules.splice(pitchIndex, 1, i18nPitcher);
       (compiler.options.module || {}).rules = rules;
     }
     compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
