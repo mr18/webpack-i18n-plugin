@@ -15,7 +15,7 @@ function genConfigFile(opt) {
     i18nDir: path.resolve(process.cwd(), "./i18n"),
     ...opt,
   };
-  myOra.info("国际化配置生成中");
+  myOra.info("国际化配置生成中...");
   let keysMap = i18nUtils.getKeysMap(),
     oldKeysMap = {},
     hasLocalFlie = false;
@@ -52,26 +52,26 @@ function genConfigFile(opt) {
     };
   });
 
-  let version = i18nUtils.genUuidKey(JSON.stringify(keysMap), "v_");
-  let i18nPolyfillCode = utils.genPolyfill(version);
-  utils.writeFile(path.resolve(options.i18nDir, "./localePolyfill.js"), i18nPolyfillCode);
+  // let version = i18nUtils.genUuidKey(JSON.stringify(keysMap), "v_");
+  // let i18nPolyfillCode = utils.genPolyfill(version);
+  // utils.writeFile(path.resolve(options.i18nDir, "./localePolyfill.js"), i18nPolyfillCode);
 
-  let i18nPolyfillTsCode = utils.genPolyfillTs();
-  utils.writeFile(path.resolve(options.i18nDir, "./localePolyfill.d.ts"), i18nPolyfillTsCode);
+  // let i18nPolyfillTsCode = utils.genPolyfillTs();
+  // utils.writeFile(path.resolve(options.i18nDir, "./localePolyfill.d.ts"), i18nPolyfillTsCode);
 
-  myOra.succeed("localePolyfill.js 生成完毕");
+  // myOra.succeed("localePolyfill.js 生成完毕");
 
   let localeCode = "module.exports = " + JSON.stringify(sortKeysMap);
-  utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/locale.js"), localeCode);
+  // utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/locale.js"), localeCode);
 
   let buf = utils.genXLSXData(xlsxData);
-  utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/国际化语言包.xlsx"), buf);
+  // utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/国际化语言包.xlsx"), buf);
 
-  myOra.succeed("zh_CN 语言包文件生成成功");
+  // myOra.succeed("zh_CN 语言包文件生成成功");
 
   translate(options, hasLocalFlie ? oldKeysMap : sortKeysMap);
 
-  myOra.succeed("国际化配置及语言包文件生成完毕");
+  myOra.succeed("国际化配置生成完毕！");
 }
 
 /**

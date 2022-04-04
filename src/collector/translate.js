@@ -13,7 +13,7 @@ const myOra = ora();
 module.exports = function genTranslateFile(options, oldKeysMap) {
   let tranKeys = Object.keys(options.translation || {});
   if (tranKeys && tranKeys.length) {
-    myOra.info("翻译文件生成中");
+    // myOra.info("翻译文件生成中");
 
     tranKeys.forEach((key) => {
       let sourceFiles = options.translation[key].source;
@@ -63,7 +63,7 @@ module.exports = function genTranslateFile(options, oldKeysMap) {
       let tranPath = path.resolve(options.i18nDir, "./" + key + "/locale.js");
       utils.writeFile(tranPath, localeCode);
 
-      myOra.succeed(key + " 语言包文件生成成功");
+      // myOra.succeed(key + " 语言包文件生成成功");
 
       let outputXlsxPath = path.resolve(options.i18nDir, "./" + key + "/待翻译内容.xlsx");
       let outputJsonPath = path.resolve(options.i18nDir, "./" + key + "/待翻译内容.json");
