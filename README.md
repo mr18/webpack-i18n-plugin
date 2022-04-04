@@ -1,13 +1,13 @@
 # 中文国际化插件，适用 vue，react
 
-# 安装
+## 安装
 
 ```
 npm install webpack-i18n-plugin -D
 
 ```
 
-# react 项目 webpack 配置
+## react 项目 webpack 配置
 
 ```
     const i18nPlugin = require("webpack-i18n-plugin");
@@ -30,7 +30,7 @@ npm install webpack-i18n-plugin -D
 
 ```
 
-# vue 项目
+## vue 项目
 
 ```
     chainWebpack: (config) => {
