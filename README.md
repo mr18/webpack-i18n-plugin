@@ -64,4 +64,4 @@ npm install webpack-i18n-plugin -D
 
 ### License
 
-[MIT License](https://github.com/mr18/webpack-i18n-plugin/blob/master/LICENSE).
+[MIT License](./LICENSE).
