@@ -1,10 +1,7 @@
-const babel = require("@babel/core");
 const fileUtils = require("./fs-utils");
 const genUtils = require("./gen-utils");
-const plugin = require("../plugin");
 const XLSX = require("xlsx");
 const path = require("path");
-const babelrc = require("./babelrc");
 const ora = require("ora");
 const fs = require("fs");
 const myOra = ora();
@@ -14,7 +11,7 @@ const myOra = ora();
  * @param options
  * @param oldKeysMap
  */
-function genTranslateFile(options, oldKeysMap) {
+module.exports.genTranslateFile = function (options, oldKeysMap) {
   let tranKeys = Object.keys(options.translation || {});
   if (tranKeys && tranKeys.length) {
     myOra.info("翻译文件生成中");
@@ -87,12 +84,4 @@ function genTranslateFile(options, oldKeysMap) {
       }
     });
   }
-}
-
-/**
- *
- * @type {genConfigFile}
- */
-module.exports = {
-  genTranslateFile: genTranslateFile,
 };

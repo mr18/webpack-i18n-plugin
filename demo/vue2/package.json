@@ -12,6 +12,7 @@
     "vue": "^2.6.14"
   },
   "devDependencies": {
+    "i18n-webpack-plugin": "file:../../",
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",

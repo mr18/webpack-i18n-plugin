@@ -7,7 +7,7 @@ const path = require("path");
  * @param list
  * @returns {*|Array}
  */
-function getFileList(filePath, list) {
+module.exports.getFileList = function (filePath, list) {
   list = list || [];
   let files = fs.readdirSync(filePath) || [];
 
@@ -22,13 +22,13 @@ function getFileList(filePath, list) {
     }
   });
   return list;
-}
+};
 
 /**
  *
  * @param filePath
  */
-const readCodeText = (filePath) => {
+module.exports.readCodeText = (filePath) => {
   let filePathStr = path.resolve(filePath);
   let text = fs.readFileSync(filePathStr, "utf-8");
 
@@ -39,7 +39,7 @@ const readCodeText = (filePath) => {
  * @param filePath
  * @param code
  */
-const writeFile = (filePath, code) => {
+module.exports.writeFile = (filePath, code) => {
   filePath = path.resolve(filePath);
   let dirname = path.dirname(filePath);
   let filePathArr = dirname.split(path.sep);
@@ -68,7 +68,7 @@ const writeFile = (filePath, code) => {
  *
  * @param filePath
  */
-const deleteFile = (filePath) => {
+module.exports.deleteFile = (filePath) => {
   if (Array.isArray(filePath)) {
     filePath.forEach((item) => {
       if (fs.existsSync(item)) {
@@ -80,14 +80,4 @@ const deleteFile = (filePath) => {
       fs.unlinkSync(filePath);
     }
   }
-};
-/**
- *
- * @type {{getFileList: getFileList, readCodeText: (function(*=)), writeFile: (function(*=, *=)), deleteFile: (function(*=))}}
- */
-module.exports = {
-  getFileList: getFileList,
-  readCodeText: readCodeText,
-  writeFile: writeFile,
-  deleteFile: deleteFile,
 };

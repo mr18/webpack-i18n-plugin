@@ -3,9 +3,7 @@ const fileUtils = require("./fs-utils");
 const genUtils = require("./gen-utils");
 const plugin = require("../plugin");
 const loaderUtils = require("i18n-webpack-loader").utils;
-const XLSX = require("xlsx");
 const path = require("path");
-const babelrc = require("./babelrc");
 const ora = require("ora");
 const fs = require("fs");
 const myOra = ora();
@@ -13,12 +11,14 @@ const gen = require("./gen");
 
 /**
  *
- * @param opt
+ * @param options
  */
 function genConfigFile(opt) {
+  let options = {
+    outputPath: path.resolve(process.cwd(), "./i18n"),
+    ...opt,
+  };
   myOra.info("国际化配置生成中");
-  let options = opt;
-  console.log(options);
   let keysMap = loaderUtils.getKeysMap(),
     oldKeysMap = {},
     hasLocalFlie = false;

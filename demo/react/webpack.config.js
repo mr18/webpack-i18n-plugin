@@ -27,7 +27,7 @@ module.exports = {
   },
   module: {
     rules: [
-      // loader 用于生产国际化代码
+      // loader 用于编译国际化代码
       {
         test: /\.(j|t)sx?$/,
         loader: "../../../i18n-webpack-loader",

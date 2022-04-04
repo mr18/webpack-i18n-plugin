@@ -6,7 +6,7 @@ const XLSX = require("xlsx");
  * @param version
  * @returns {string|*|XML|void}
  */
-const genPolyfill = function (version) {
+module.exports.genPolyfill = function (version) {
   return fileUtils.readCodeText(path.resolve(__dirname, "./tplCode/polyfill.js")).replace("${version}", version);
 };
 
@@ -15,7 +15,7 @@ const genPolyfill = function (version) {
  * @param version
  * @returns {string|*|XML|void}
  */
-const genPolyfillTs = function () {
+module.exports.genPolyfillTs = function () {
   return fileUtils.readCodeText(path.resolve(__dirname, "./tplCode/polyfill.d.ts"));
 };
 
@@ -24,19 +24,9 @@ const genPolyfillTs = function () {
  * @param data
  * @returns {Number|*}
  */
-function genXLSXData(data) {
+module.exports.genXLSXData = function (data) {
   let ws = XLSX.utils.json_to_sheet(data);
   let wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Sheet");
   return XLSX.write(wb, { type: "buffer", bookType: "xlsx" });
-}
-
-/**
- *
- * @type {{genPolyfill: genPolyfill, genXLSXData: genXLSXData}}
- */
-module.exports = {
-  genPolyfill: genPolyfill,
-  genXLSXData: genXLSXData,
-  genPolyfillTs: genPolyfillTs,
 };
