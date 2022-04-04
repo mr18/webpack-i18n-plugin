@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/mr18/webpack-i18n-plugin#readme",
   "dependencies": {
-    "i18n-webpack-loader": "file:../i18n-webpack-loader",
+    "i18n-webpack-loader": "^0.8.1",
     "loader-utils": "^1.4.0",
     "ora": "^1.4.0",
     "xlsx": "^0.18.5"
