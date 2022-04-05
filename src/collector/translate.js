@@ -66,20 +66,19 @@ module.exports = function genTranslateFile(options, oldKeysMap) {
       // myOra.succeed(key + " 语言包文件生成成功");
 
       let outputXlsxPath = path.resolve(options.i18nDir, "./" + key + "/待翻译内容.xlsx");
-      let outputJsonPath = path.resolve(options.i18nDir, "./" + key + "/待翻译内容.json");
+      // let outputJsonPath = path.resolve(options.i18nDir, "./" + key + "/待翻译内容.json");
       if (xlsxData.length) {
-        myOra.info(xlsxData.length + "条待翻译");
-
         let buf = utils.genXLSXData(xlsxData);
         utils.writeFile(outputXlsxPath, buf);
-        utils.writeFile(outputJsonPath, JSON.stringify(jsonData));
+        // utils.writeFile(outputJsonPath, JSON.stringify(jsonData));
 
-        myOra.info("待翻译文件保存目录：");
-        myOra.info(" > " + outputXlsxPath);
-        myOra.info(" > " + outputJsonPath);
+        myOra.warn(xlsxData.length + "条待翻译数据，文件目录：");
+        myOra.warn(" > " + outputXlsxPath);
+        // myOra.warn(" > " + outputXlsxPath);
+        // myOra.info(" > " + outputJsonPath);
       } else {
         utils.deleteFile(outputXlsxPath);
-        utils.deleteFile(outputJsonPath);
+        // utils.deleteFile(outputJsonPath);
       }
     });
   }

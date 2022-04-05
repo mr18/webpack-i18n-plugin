@@ -10,6 +10,7 @@ class i18nPlugin {
   apply(compiler) {
     let entries = compiler.options.entry;
     let newEntries = {};
+
     // entry添加polyfill
     Object.keys(entries).forEach((key) => {
       let entry = entries[key];
@@ -29,6 +30,7 @@ class i18nPlugin {
       }
     });
     compiler.options.entry = newEntries;
+
     // 通过pitcher修改loader
     let rules = (compiler.options.module || {}).rules;
     let pitchIndex, prePitcher;
@@ -38,7 +40,6 @@ class i18nPlugin {
         prePitcher = item;
       }
     });
-
     if (prePitcher) {
       let i18nPitcher = {
         ...prePitcher,
@@ -53,15 +54,15 @@ class i18nPlugin {
       (compiler.options.module || {}).rules = rules;
     }
 
+    // 收集国际化信息，并生成对应的文件
     compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
-      // 收集国际化信息，并生成对应的文件
       collector(this.i18nConfig);
+
       // 生成国际化版本号，适用于语言包缓存等
       let keysMap = i18nUtils.getKeysMap();
       let version = i18nUtils.genUuidKey(JSON.stringify(keysMap), "v_");
       Object.keys(compilation.assets).forEach((assetName) => {
         if (/\.js$/.test(assetName)) {
-          console.log(assetName);
           let content = compilation.assets[assetName].source();
           content = content.replace(/\$\{i18n_locale_language_version\}/g, version);
           compilation.assets[assetName] = new ConcatSource(content);

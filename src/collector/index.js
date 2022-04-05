@@ -43,13 +43,13 @@ function genConfigFile(opt) {
   let allTextKey = textKeyArr.concat(newTextKeyArr);
 
   let textArr = [];
-  let xlsxData = allTextKey.map((key) => {
-    textArr.push(keysMap[key]);
+  let xlsxData = allTextKey.forEach((key) => {
+    // textArr.push(keysMap[key]);
     sortKeysMap[key] = keysMap[key];
-    return {
-      key,
-      text: keysMap[key],
-    };
+    // return {
+    //   key,
+    //   text: keysMap[key],
+    // };
   });
 
   // let version = i18nUtils.genUuidKey(JSON.stringify(keysMap), "v_");
@@ -62,16 +62,16 @@ function genConfigFile(opt) {
   // myOra.succeed("localePolyfill.js 生成完毕");
 
   let localeCode = "module.exports = " + JSON.stringify(sortKeysMap);
-  // utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/locale.js"), localeCode);
+  utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/locale.js"), localeCode);
 
-  let buf = utils.genXLSXData(xlsxData);
+  // let buf = utils.genXLSXData(xlsxData);
   // utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/国际化语言包.xlsx"), buf);
 
   // myOra.succeed("zh_CN 语言包文件生成成功");
 
   translate(options, hasLocalFlie ? oldKeysMap : sortKeysMap);
 
-  myOra.succeed("国际化配置生成完毕！");
+  myOra.succeed("国际化配置生成完毕！\n");
 }
 
 /**

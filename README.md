@@ -14,13 +14,11 @@ npm install webpack-i18n-plugin -D
 const i18nPlugin = require("webpack-i18n-plugin");
 
 // 配置loader
-rules: [
-    {
-        test: /\.(j|t)sx?$/,
-        loader: "webpack-i18n-plugin/loader",
-        exclude: /node_modules/,
-    },
-],
+rules: [{
+    test: /\.(j|t)sx?$/,
+    loader: "webpack-i18n-plugin/loader",
+    exclude: /node_modules/,
+}],
 
 // 配置plugins
 plugins: [
@@ -58,6 +56,12 @@ const i18nConfig = {
     }
 };
 ```
+
+#### 备注
+
+> 1.编译结果暴露 `$i8n` `$$i8n` 全局方法
+
+> 2.需要多次 `build` 生成固定版本语言包以供使用
 
 ### License
 
