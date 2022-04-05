@@ -11,6 +11,8 @@ npm install webpack-i18n-plugin -D
 ### `react` 项目`webpack`配置
 
 ```
+// webpack.config.js
+
 const i18nPlugin = require("webpack-i18n-plugin");
 
 // 配置loader
@@ -31,6 +33,10 @@ plugins: [
 ### `vue` 项目`webpack`配置
 
 ```
+// vue.config.js
+
+const i18nPlugin = require("webpack-i18n-plugin");
+
 chainWebpack: (config) => {
 
     // 配置loader
