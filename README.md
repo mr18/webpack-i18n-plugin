@@ -48,10 +48,13 @@ chainWebpack: (config) => {
 
 ```
 const i18nConfig = {
-    i18nDir: path.resolve(__dirname, "./i18n"), //国际化配置输出目录（可选）
+    //国际化配置输出目录（可选）
+    i18nDir: path.resolve(__dirname, "./i18n"),
     translation: {
         // 配置en_US 语言包
-        en_US: { source: [path.resolve(__dirname, "./locale/en_US/翻译文件.xlsx")] },
+        en_US: {
+            source: [path.resolve(__dirname, "./翻译文件.xlsx")]
+        },
         ...
     }
 };
