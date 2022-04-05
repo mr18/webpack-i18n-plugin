@@ -2,6 +2,5 @@
 .vscode
 demo/**/dist
 node_modules
-demo/**/i18n
 package-lock.json
 
