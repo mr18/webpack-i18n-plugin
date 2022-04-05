@@ -8,14 +8,9 @@ module.exports = function (source) {
         filename: utils.genUuidKey(this.resourcePath) + ".js",
         plugins: [plugin],
       });
-      // console.log("\n----------------------------------------------------------------------------------------");
-      // console.log(source);
-      // console.log("\n=========================================================================================");
-      // console.log(result.code);
-      // console.log("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       return result.code;
     } catch (e) {
-      console.error(e);
+      // console.error(e);
     }
   }
   return source;

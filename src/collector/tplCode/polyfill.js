@@ -1,18 +1,16 @@
 (function () {
-  window.$LOCALE_VERSION = "${i18n_locale_language_version}";
-  window.$LOCALE = {};
+  let _this = window;
+  _this.$LOCALE_VERSION = "${i18n_locale_language_version}";
+  _this.$LOCALE = {};
   let $i8n = function (key, val) {
-    if (key && typeof val === "string") {
-      return (window.LOCALE || {})[key] || val;
-    }
-    return val;
+    return (_this.$LOCALE || {})[key] || val;
   };
   let $$i8n = function (val) {
     return val;
   };
   $i8n.locale = function (locale) {
-    window.LOCALE = locale || {};
+    _this.$LOCALE = locale || {};
   };
-  window.$i8n = $i8n;
-  window.$$i8n = $$i8n;
+  _this.$i8n = $i8n;
+  _this.$$i8n = $$i8n;
 })();

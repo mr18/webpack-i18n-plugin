@@ -1,4 +1,3 @@
-const _opt = require("./options");
 const ora = require("ora");
 const myOra = ora();
 /**

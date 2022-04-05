@@ -54,10 +54,7 @@ module.exports.pitch = function (remainingRequest) {
 
     // the template compiler uses esm exports
     let exportStr = `export * from ${newRequest}`;
-    // console.log("\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    // console.log(request);
-    // console.log("\n==================================================================================");
-    // console.log(exportStr);
+
     return exportStr;
   }
 

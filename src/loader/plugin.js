@@ -13,7 +13,6 @@ const myOra = ora();
  */
 const plugin = function (api, config) {
   let options = Object.assign({}, _options, config);
-  options.excludedCall = _options.excludedCall.concat(config.excludedCall);
 
   return {
     visitor: {
