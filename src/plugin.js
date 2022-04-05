@@ -23,7 +23,7 @@ class i18nPlugin {
         if (typeof entry.import === "string") {
           entry.import = [polyfilePath, entry.import];
           newEntries[key] = entry;
-        } else {
+        } else if (Array.isArray(entry.import)) {
           entry.import.unshift(polyfilePath);
           newEntries[key] = entry;
         }
