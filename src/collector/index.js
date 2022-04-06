@@ -1,10 +1,10 @@
-const utils = require("./utils");
-const i18nUtils = require("../loader/utils");
-const path = require("path");
-const ora = require("ora");
-const fs = require("fs");
+const utils = require('./utils');
+const babelUtils = require('../babel-plugin/utils');
+const path = require('path');
+const ora = require('ora');
+const fs = require('fs');
 const myOra = ora();
-const translate = require("./translate");
+const translate = require('./translate');
 
 /**
  *
@@ -12,14 +12,14 @@ const translate = require("./translate");
  */
 function genConfigFile(opt) {
   let options = {
-    i18nDir: path.resolve(process.cwd(), "./i18n"),
+    i18nDir: path.resolve(process.cwd(), './i18n'),
     ...opt,
   };
-  myOra.info("国际化配置生成中...");
-  let keysMap = i18nUtils.getKeysMap(),
+  myOra.info('国际化配置生成中...');
+  let i18nMap = babelUtils.getI18nMap(),
     oldKeysMap = {},
     hasLocalFlie = false;
-  let localeFilePath = path.resolve(options.i18nDir, "./zh_CN/locale.js");
+  let localeFilePath = path.resolve(options.i18nDir, './zh_CN/locale.js');
   if (fs.existsSync(localeFilePath)) {
     hasLocalFlie = true;
     oldKeysMap = require(localeFilePath);
@@ -28,7 +28,7 @@ function genConfigFile(opt) {
   let textKeyArr = [],
     newTextKeyArr = [],
     sortKeysMap = {};
-  Object.keys(keysMap).map((key) => {
+  Object.keys(i18nMap).map((key) => {
     if (oldKeysMapKeys.length && !oldKeysMap[key]) {
       newTextKeyArr.push(key);
     } else {
@@ -41,15 +41,15 @@ function genConfigFile(opt) {
     });
   }
   textKeyArr.concat(newTextKeyArr).forEach((key) => {
-    sortKeysMap[key] = keysMap[key];
+    sortKeysMap[key] = i18nMap[key];
   });
 
-  let localeCode = "module.exports = " + JSON.stringify(sortKeysMap);
-  utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/locale.js"), localeCode);
+  let localeCode = 'module.exports = ' + JSON.stringify(sortKeysMap);
+  utils.writeFile(path.resolve(options.i18nDir, './zh_CN/locale.js'), localeCode);
 
   translate(options, hasLocalFlie ? oldKeysMap : sortKeysMap);
 
-  myOra.succeed("国际化配置生成完毕！\n");
+  myOra.succeed('国际化配置生成完毕！\n');
 }
 
 /**
