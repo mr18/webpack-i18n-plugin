@@ -43,10 +43,9 @@ plugins:[
 
 ```
 const i18nConfig = {    
-    //i18nDir: path.resolve(__dirname, "./i18n"),//国际化目录（可选）
+    i18nDir: path.resolve(__dirname, "./i18n"),//国际化目录（可选）
     translation: {
-        //en_US 语言包
-        en_US: [path.resolve(__dirname, "翻译文件.xlsx")],
+        en_US: [path.resolve(__dirname, "翻译文件.xlsx")],//en_US语言包
         ...
     }
 };
