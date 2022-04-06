@@ -1,17 +1,15 @@
-const babel = require("@babel/core");
-const plugin = require("./plugin");
-const utils = require("./utils");
+const babel = require('@babel/core');
+const plugin = require('../babel-plugin');
+const utils = require('../babel-plugin/utils');
 module.exports = function (source) {
   if (utils.isChinese(source)) {
     try {
       let result = babel.transformSync(source, {
-        filename: utils.genUuidKey(this.resourcePath) + ".js",
+        configFile: false,
         plugins: [plugin],
       });
       return result.code;
-    } catch (e) {
-      // console.error(e);
-    }
+    } catch (e) {}
   }
   return source;
 };
