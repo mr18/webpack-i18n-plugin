@@ -19,6 +19,7 @@ plugins: [
     new i18nPlugin(i18nConfig),
     ...
 ]
+
 // vue.config.js
 chainWebpack: (config) => {
     config.plugin("i18n").use(i18nPlugin).tap((options) => {
@@ -29,7 +30,7 @@ chainWebpack: (config) => {
 ### babel plugin 配置
 
 ```
-// vue.config.js
+// .babelrc | babel.config.js
 
 plugins:[
     ...
@@ -41,14 +42,11 @@ plugins:[
 ### 插件配置项`i18nConfig`
 
 ```
-const i18nConfig = {
-    
+const i18nConfig = {    
     //i18nDir: path.resolve(__dirname, "./i18n"),//国际化目录（可选）
     translation: {
         //en_US 语言包
-        en_US: {
-            source: [path.resolve(__dirname, "翻译文件.xlsx")]
-        },
+        en_US: [path.resolve(__dirname, "翻译文件.xlsx")],
         ...
     }
 };
