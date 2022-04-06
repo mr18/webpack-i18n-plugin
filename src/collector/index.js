@@ -12,7 +12,7 @@ const translate = require('./translate');
  */
 function genConfigFile(opt) {
   let options = {
-    i18nDir: path.resolve(process.cwd(), './i18n'),
+    i18nDir: utils.defaultDir(),
     ...opt,
   };
   myOra.info('国际化配置生成中...');
@@ -48,8 +48,6 @@ function genConfigFile(opt) {
   utils.writeFile(path.resolve(options.i18nDir, './zh_CN/locale.js'), localeCode);
 
   translate(options, hasLocalFlie ? oldKeysMap : sortKeysMap);
-
-  myOra.succeed('国际化配置生成完毕！\n');
 }
 
 /**
@@ -57,3 +55,4 @@ function genConfigFile(opt) {
  * @type {genConfigFile}
  */
 module.exports = genConfigFile;
+module.exports.utils = utils;
