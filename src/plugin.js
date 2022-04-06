@@ -64,8 +64,10 @@ class i18nPlugin {
       Object.keys(compilation.assets).forEach((assetName) => {
         if (/\.js$/.test(assetName)) {
           let content = compilation.assets[assetName].source();
-          content = content.replace(/\$\{i18n_locale_language_version\}/g, version);
-          compilation.assets[assetName] = new ConcatSource(content);
+          if (typeof content === 'string') {
+            content = content.replace(/\$\{i18n_locale_language_version\}/g, version);
+            compilation.assets[assetName] = new ConcatSource(content);
+          }
         }
       });
     });
