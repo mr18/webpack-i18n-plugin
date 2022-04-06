@@ -1,15 +1,22 @@
 import React from "react";
 
 export default class Test extends React.Component {
-  state: any = {
-    title: "标题tsx",
-  };
+  state: any;
+  constructor(props: any) {
+    super(props);
+    let b: string = "s";
+    this.state = {
+      title: "标题tsx" + b + " （ " + "撒" + b + "） ",
+    };
+  }
   render() {
     return (
       <div>
-        <header>这是标题tsx</header>
-        <div title="这是提示文字tsx">
-          <p>这是内容tsx</p>
+        <header>吓死</header>
+        <div title="aaaxas">
+          <p>
+            萨达（<span>吓死</span>）
+          </p>
         </div>
         <footer>{this.state.title}</footer>
       </div>

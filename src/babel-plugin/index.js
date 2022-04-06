@@ -1,4 +1,4 @@
-const visitors = require('./visitors');
+const visitors = require("./visitors");
 
 const plugin = function (api, config) {
   return {

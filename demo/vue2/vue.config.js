@@ -6,16 +6,6 @@ let i18nConfig = require("./i18n.config");
 module.exports = defineConfig({
   transpileDependencies: true,
   chainWebpack: (config) => {
-    config.module
-      .rule("i18n")
-      .test(/\.(t|j)sx?$/)
-      .use("i18n-loader")
-      // .loader("webpack-i18n-plugin/loader");
-      .loader("../../loader");
-    // //
-    // //
-    // //
-    // //
     config
       .plugin("i18n")
       .use(i18nPlugin)

@@ -1,0 +1,1 @@
+module.exports = {"22hx329":"这是标题","49lujdl":"这是提示文字","20icjjs":"这是内容","1rkpugw":"标题tsx","pvtcqb":" （ ","7am8er":"撒","cxxe2g":"） ","lun1if":"吓死","1ahepas":"萨达（","7yp9t7":"）"}

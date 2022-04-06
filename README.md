@@ -8,6 +8,8 @@
 npm install webpack-i18n-plugin -D
 ```
 
+> 为了兼容 vue 和 react，插件需要同时配置 webpack plugins 和 babel plugins
+
 ### webpack plugin 配置
 
 ```
@@ -15,39 +17,39 @@ const i18nPlugin = require("webpack-i18n-plugin");
 
 // webpack.config.js
 plugins: [
-    ...
-    new i18nPlugin(i18nConfig),
-    ...
+  ...
+  new i18nPlugin(i18nConfig),
+  ...
 ]
 
 // vue.config.js
 chainWebpack: (config) => {
-    config.plugin("i18n").use(i18nPlugin).tap((options) => {
-        return [...options, i18nConfig];
-    });
+  config.plugin("i18n").use(i18nPlugin).tap((options) => {
+    return [...options, i18nConfig];
+  });
 }
 ```
+
 ### babel plugin 配置
 
 ```
 // .babelrc | babel.config.js
 
 plugins:[
-    ...
-    "mudule:webpack-i18n-plugin/babel"
-    ...
+  ...
+  "mudule:webpack-i18n-plugin/babel"
 ]
 ```
 
 ### 插件配置项`i18nConfig`
 
 ```
-const i18nConfig = {    
-    i18nDir: path.resolve(__dirname, "./i18n"),//国际化目录（可选）
-    translation: {
-        en_US: [path.resolve(__dirname, "翻译文件.xlsx")],//en_US语言包
-        ...
-    }
+const i18nConfig = {
+  i18nDir: path.resolve(__dirname, "./i18n"), //国际化目录（可选）
+  translation: {
+    en_US: [path.resolve(__dirname, "翻译文件.xlsx")], //en_US语言包
+    ...
+  },
 };
 ```
 

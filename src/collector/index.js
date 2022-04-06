@@ -1,10 +1,10 @@
-const utils = require('./utils');
-const babelUtils = require('../babel-plugin/utils');
-const path = require('path');
-const ora = require('ora');
-const fs = require('fs');
+const utils = require("./utils");
+const babelUtils = require("../babel-plugin/utils");
+const path = require("path");
+const ora = require("ora");
+const fs = require("fs");
 const myOra = ora();
-const translate = require('./translate');
+const translate = require("./translate");
 
 /**
  *
@@ -15,11 +15,11 @@ function genConfigFile(opt) {
     i18nDir: utils.defaultDir(),
     ...opt,
   };
-  myOra.info('国际化配置生成中...');
+  myOra.info("国际化配置生成中...");
   let i18nMap = babelUtils.getI18nMap(),
     oldKeysMap = {},
     hasLocalFlie = false;
-  let localeFilePath = path.resolve(options.i18nDir, './zh_CN/locale.js');
+  let localeFilePath = path.resolve(options.i18nDir, "./zh_CN/index.js");
   if (fs.existsSync(localeFilePath)) {
     hasLocalFlie = true;
     oldKeysMap = require(localeFilePath);
@@ -44,8 +44,8 @@ function genConfigFile(opt) {
     sortKeysMap[key] = i18nMap[key];
   });
 
-  let localeCode = 'module.exports = ' + JSON.stringify(sortKeysMap);
-  utils.writeFile(path.resolve(options.i18nDir, './zh_CN/locale.js'), localeCode);
+  let localeCode = "module.exports = " + JSON.stringify(sortKeysMap);
+  utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/index.js"), localeCode);
 
   translate(options, hasLocalFlie ? oldKeysMap : sortKeysMap);
 }

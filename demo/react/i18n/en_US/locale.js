@@ -1,1 +1,0 @@
-module.exports = {"22hx329":"english","49lujdl":"english","20icjjs":"english","1rkpugw":"english","3s34xny":"english","6jpuhel":"english","3q3ke5h":"english"}

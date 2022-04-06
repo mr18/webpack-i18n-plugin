@@ -1,8 +1,9 @@
-const path = require('path');
-const collector = require('./collector');
-const i18nUtils = require('./babel-plugin/utils');
-const ConcatSource = require('webpack-sources').ConcatSource;
-const polyfilePath = require.resolve('./collector/tplCode/polyfill.js');
+const path = require("path");
+const collector = require("./collector");
+const i18nUtils = require("./babel-plugin/utils");
+const ConcatSource = require("webpack-sources").ConcatSource;
+// const polyfilePath = require.resolve("./collector/polyfill.js");
+const polyfilePath = path.resolve(__dirname, "./collector/polyfill.mjs");
 class i18nPlugin {
   constructor(config) {
     this.i18nConfig = config;
@@ -14,13 +15,13 @@ class i18nPlugin {
     // entry添加polyfill
     Object.keys(entries).forEach((key) => {
       let entry = entries[key];
-      if (typeof entry == 'string') {
+      if (typeof entry == "string") {
         newEntries[key] = [polyfilePath, entries[key]];
       } else if (Array.isArray(entry)) {
         entry.unshift(polyfilePath);
         newEntries[key] = entry;
       } else if (entry.import) {
-        if (typeof entry.import === 'string') {
+        if (typeof entry.import === "string") {
           entry.import = [polyfilePath, entry.import];
           newEntries[key] = entry;
         } else if (Array.isArray(entry.import)) {
@@ -35,7 +36,7 @@ class i18nPlugin {
     let rules = (compiler.options.module || {}).rules;
     let pitchIndex, prePitcher;
     rules.forEach((item, index) => {
-      if (!prePitcher && /vue-loader/.test(item.loader) && /pitcher/.test(item.loader) && !/i18n-pitcher/.test(item.loader)) {
+      if (!prePitcher && /vue-loader/.test(item.loader) && /pitcher/.test(item.loader) && !/i18pitcher/.test(item.loader)) {
         pitchIndex = index;
         prePitcher = item;
       }
@@ -43,7 +44,7 @@ class i18nPlugin {
     if (prePitcher) {
       let i18nPitcher = {
         ...prePitcher,
-        loader: path.resolve(__dirname, './loader/i18n-pitcher.js'),
+        loader: path.resolve(__dirname, "./loader/i18pitcher.js"),
         resourceQuery: prePitcher.resourceQuery,
         options: {
           ...prePitcher.options,
@@ -55,23 +56,24 @@ class i18nPlugin {
     }
 
     // 收集国际化信息，并生成对应的文件
-    compiler.hooks.emit.tap('i18nPlugin', (compilation) => {
+    compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
       collector(this.i18nConfig);
 
       // 生成国际化版本号，适用于语言包缓存等
       let i18nMap = i18nUtils.getI18nMap();
-      let version = i18nUtils.genUuidKey(JSON.stringify(i18nMap), 'v_');
+      let version = i18nUtils.genUuidKey(JSON.stringify(i18nMap), "v_");
       Object.keys(compilation.assets).forEach((assetName) => {
         if (/\.js$/.test(assetName)) {
           let content = compilation.assets[assetName].source();
-          if (typeof content === 'string') {
+          if (typeof content === "string") {
             content = content.replace(/\$\{i18n_locale_language_version\}/g, version);
             compilation.assets[assetName] = new ConcatSource(content);
           }
         }
-      });      
+      });
     });
-    compiler.hooks.done.tap('i18nPlugin', (compilation) => {
+    // 输出国际化结果信息
+    compiler.hooks.done.tap("i18nPlugin", (stats) => {
       collector.utils.printUndo(this.i18nConfig);
     });
   }

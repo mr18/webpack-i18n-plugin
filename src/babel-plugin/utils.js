@@ -1,7 +1,7 @@
-const types = require('@babel/types');
-const ora = require('ora');
+const types = require("@babel/types");
+const ora = require("ora");
 const myOra = ora();
-const OPTIONS = require('./options');
+const OPTIONS = require("./options");
 
 /**
  *
@@ -11,7 +11,7 @@ const OPTIONS = require('./options');
  */
 
 const genUuidKey = function (value, prefixKey) {
-  let valArr = (value || '').trim().split('');
+  let valArr = (value || "").split("");
   let code = 0;
   let total = 0;
   valArr.forEach((val, index) => {
@@ -23,7 +23,7 @@ const genUuidKey = function (value, prefixKey) {
   code *= 100000000;
   code += value.length + total;
   let uniqueKey = parseInt(code).toString(36);
-  return (prefixKey || '') + uniqueKey;
+  return (prefixKey || "") + uniqueKey;
 };
 module.exports.genUuidKey = genUuidKey;
 
@@ -42,7 +42,7 @@ module.exports.isChinese = function (val) {
  * @returns {string}
  */
 module.exports.genPropertyKey = function (key) {
-  return '$_' + (key || '');
+  return "$_" + (key || "");
 };
 
 /**
@@ -57,9 +57,9 @@ let I18N_MAP = {};
  * @param value
  */
 const collectKeys = function (uuidKey, value) {
-  value = (value || '').replace(/'/g, '"').trim();
+  value = value || "";
   if (I18N_MAP[uuidKey] && value && I18N_MAP[uuidKey] !== value) {
-    myOra.warn('存在重复的key：' + uuidKey + ' ---> ' + I18N_MAP[uuidKey] + ' ---> ' + value);
+    myOra.warn("存在重复的key：" + uuidKey + " ---> " + I18N_MAP[uuidKey] + " ---> " + value);
     myOra.succeed(' > 请给其中之一添加自定义key值，example：$i8n("key","' + value + '")');
   } else if (uuidKey && value && !I18N_MAP[uuidKey]) {
     I18N_MAP[uuidKey] = value;
@@ -96,13 +96,7 @@ module.exports.findPropertyParent = function (path) {
 module.exports.findParentFunctionLikeExpression = function findParentFunctionLikeExpression(path) {
   return path.findParent(($path) => {
     let node = $path.node;
-    return (
-      types.isArrowFunctionExpression(node) ||
-      types.isFunctionDeclaration(node) ||
-      types.isFunctionExpression(node) ||
-      types.isClassExpression(node) ||
-      types.isClassDeclaration(node)
-    );
+    return types.isArrowFunctionExpression(node) || types.isFunctionDeclaration(node) || types.isFunctionExpression(node) || types.isClassExpression(node) || types.isClassDeclaration(node);
   });
 };
 
@@ -118,7 +112,7 @@ module.exports.getKeyProperty = function (properties, key) {
     if (item.key && item.key.name === key) {
       node = item;
       if (!item.value.value) {
-        myOra.warn('配置错误,key: ' + key + ' 值不可为空，请检查');
+        myOra.warn("配置错误,key: " + key + " 值不可为空，请检查");
       }
     }
   });
@@ -131,11 +125,11 @@ module.exports.getKeyProperty = function (properties, key) {
  * @returns {string}
  */
 module.exports.getCallExpressionName = function (node) {
-  let callName = '';
+  let callName = "";
 
   // 多级命名空间,如：xxx.xxx.xxx
   function callObjName(callObj, name) {
-    name += '.' + callObj.property.name;
+    name += "." + callObj.property.name;
     if (types.isMemberExpression(callObj.object)) {
       return callObjName(callObj.object, name);
     }
@@ -145,9 +139,9 @@ module.exports.getCallExpressionName = function (node) {
 
   if (types.isCallExpression(node)) {
     if (types.isMemberExpression(node.callee)) {
-      callName = callObjName(node.callee, '');
+      callName = callObjName(node.callee, "");
     } else {
-      callName = node.callee.name || '';
+      callName = node.callee.name || "";
     }
   }
   return callName;
@@ -161,8 +155,8 @@ module.exports.getCallExpressionName = function (node) {
  * @returns {*}
  */
 module.exports.genAIExpression = function (value, isExpression, key) {
-  value = (value || '').trim();
-  let valStr = value.replace(/'/g, '"').replace(/(\n)/g, '\\n');
+  value = value || "";
+  let valStr = value.replace(/'/g, '"').replace(/(\n)/g, "\\n");
   key = key || genUuidKey(value);
   collectKeys(key, value);
   if (isExpression) {

@@ -1,6 +1,6 @@
-const babel = require('@babel/core');
-const plugin = require('../babel-plugin');
-const utils = require('../babel-plugin/utils');
+const babel = require("@babel/core");
+const plugin = require("../babel-plugin");
+const utils = require("../babel-plugin/utils");
 module.exports = function (source) {
   if (utils.isChinese(source)) {
     try {
@@ -9,7 +9,9 @@ module.exports = function (source) {
         plugins: [plugin],
       });
       return result.code;
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   }
   return source;
 };

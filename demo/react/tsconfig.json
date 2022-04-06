@@ -7,5 +7,5 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["locale"]
+  "exclude": ["node_modules"]
 }

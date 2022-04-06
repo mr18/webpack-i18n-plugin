@@ -12,12 +12,5 @@ module.exports = defineConfig({
       .tap((options) => {
         return [...options, i18nConfig];
       });
-
-    config.module
-      .rule("i18n")
-      .test(/\.(t|j)sx?$/)
-      .use("i18n-loader")
-      // .loader("webpack-i18n-plugin/loader");
-      .loader("../../loader");
   },
 });
