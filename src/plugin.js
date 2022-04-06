@@ -59,8 +59,8 @@ class i18nPlugin {
       collector(this.i18nConfig);
 
       // 生成国际化版本号，适用于语言包缓存等
-      let keysMap = i18nUtils.getKeysMap();
-      let version = i18nUtils.genUuidKey(JSON.stringify(keysMap), 'v_');
+      let i18nMap = i18nUtils.getI18nMap();
+      let version = i18nUtils.genUuidKey(JSON.stringify(i18nMap), 'v_');
       Object.keys(compilation.assets).forEach((assetName) => {
         if (/\.js$/.test(assetName)) {
           let content = compilation.assets[assetName].source();
