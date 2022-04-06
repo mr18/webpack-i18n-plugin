@@ -9,11 +9,11 @@ const myOra = ora();
  * @param options
  * @param oldKeysMap
  */
-module.exports = function genTranslateFile(options, oldKeysMap) {
+module.exports = function translate(options, oldKeysMap) {
   let tranKeys = Object.keys(options.translation || {});
   if (tranKeys && tranKeys.length) {
-    tranKeys.forEach((key) => {
-      let sourceFiles = options.translation[key];
+    tranKeys.forEach((tranKey) => {
+      let sourceFiles = options.translation[tranKey] || [];
       if (sourceFiles && typeof sourceFiles === 'string') {
         sourceFiles = [sourceFiles];
       }
@@ -57,16 +57,16 @@ module.exports = function genTranslateFile(options, oldKeysMap) {
         }
       });
       let localeCode = 'module.exports = ' + JSON.stringify(localeResult);
-      let tranPath = path.resolve(options.i18nDir, './' + key + '/locale.js');
+      let tranPath = path.resolve(options.i18nDir, './' + tranKey + '/locale.js');
       utils.writeFile(tranPath, localeCode);
 
-      let outputXlsxPath = path.resolve(options.i18nDir, './' + key + '/待翻译内容.xlsx');
+      let outputXlsxPath = path.resolve(options.i18nDir, './' + tranKey + '/待翻译内容.xlsx');
       if (xlsxData.length) {
         let buf = utils.genXLSXData(xlsxData);
         utils.writeFile(outputXlsxPath, buf);
-
-        myOra.warn(xlsxData.length + '条待翻译数据，文件目录：');
-        myOra.warn(' > ' + outputXlsxPath);
+        utils.setUndoCount(tranKey, xlsxData.length);
+        // myOra.warn(xlsxData.length + '条待翻译数据，文件目录：');
+        // myOra.warn(' > ' + outputXlsxPath);
       } else {
         utils.deleteFile(outputXlsxPath);
       }
