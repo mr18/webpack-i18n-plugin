@@ -1,8 +1,8 @@
-const qs = require("querystring");
+const qs = require('querystring');
 const isPitcher = (l) => l.path !== __filename;
 const isNullLoader = (l) => /(\/|\\|@)null-loader/.test(l.path);
-const loaderPath = require.resolve("./index.js");
-const loaderUtils = require("loader-utils");
+const loaderPath = require.resolve('./index.js');
+const loaderUtils = require('loader-utils');
 module.exports = function (source) {
   return source;
 };
@@ -30,8 +30,8 @@ module.exports.pitch = function (remainingRequest) {
     const loaderStrings = [];
 
     loaders.forEach((loader) => {
-      const identifier = typeof loader === "string" ? loader : loader.path + loader.query;
-      const request = typeof loader === "string" ? loader : loader.request;
+      const identifier = typeof loader === 'string' ? loader : loader.path + loader.query;
+      const request = typeof loader === 'string' ? loader : loader.request;
       if (!seen.has(identifier)) {
         seen.set(identifier, true);
         // loader.request contains both the resolved loader path and its options
@@ -39,9 +39,9 @@ module.exports.pitch = function (remainingRequest) {
         loaderStrings.push(request);
       }
     });
-    let loadRequest = request.replace(/\\['"]+/g, '"').split("-!");
+    let loadRequest = request.replace(/\\['"]+/g, '"').split('-!');
 
-    return loaderUtils.stringifyRequest(this, "-!" + [...loaderStrings, loadRequest[1]].join("!"));
+    return loaderUtils.stringifyRequest(this, '-!' + [...loaderStrings, loadRequest[1]].join('!'));
   };
 
   let prePitcher = options.prePitcher;
@@ -49,7 +49,7 @@ module.exports.pitch = function (remainingRequest) {
 
   let request = prePitcherLoader.pitch.call({ ...this, loaders }, remainingRequest);
 
-  if (query.type === "template") {
+  if (query.type === 'template') {
     const newRequest = genRequest([loaderPath], request);
 
     // the template compiler uses esm exports
@@ -57,6 +57,5 @@ module.exports.pitch = function (remainingRequest) {
 
     return exportStr;
   }
-
   return request;
 };
