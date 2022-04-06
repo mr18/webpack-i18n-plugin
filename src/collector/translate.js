@@ -13,7 +13,7 @@ module.exports = function genTranslateFile(options, oldKeysMap) {
   let tranKeys = Object.keys(options.translation || {});
   if (tranKeys && tranKeys.length) {
     tranKeys.forEach((key) => {
-      let sourceFiles = options.translation[key].source;
+      let sourceFiles = options.translation[key];
       if (sourceFiles && typeof sourceFiles === 'string') {
         sourceFiles = [sourceFiles];
       }
