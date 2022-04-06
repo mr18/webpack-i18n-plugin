@@ -1,0 +1,1 @@
+module.exports = {"47vwib9":"洒水大多商店"}
