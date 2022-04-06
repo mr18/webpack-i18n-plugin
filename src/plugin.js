@@ -69,7 +69,10 @@ class i18nPlugin {
             compilation.assets[assetName] = new ConcatSource(content);
           }
         }
-      });
+      });      
+    });
+    compiler.hooks.done.tap('i18nPlugin', (compilation) => {
+      collector.utils.printUndo(this.i18nConfig);
     });
   }
 }
