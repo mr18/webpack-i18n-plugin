@@ -8,7 +8,7 @@
 npm install webpack-i18n-plugin -D
 ```
 
-> 为了兼容 vue 和 react，插件需要同时配置 webpack plugins 和 babel plugins
+> 为了兼容 vue 和 react，需要同时配置 webpack plugins 和 babel plugins
 
 ### webpack plugins 配置
 
