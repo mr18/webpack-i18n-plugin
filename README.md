@@ -37,7 +37,7 @@ chainWebpack: (config) => {
 
 plugins:[
   ...
-  "mudule:webpack-i18n-plugin/babel"
+  "webpack-i18n-plugin/babel"
 ]
 ```
 
