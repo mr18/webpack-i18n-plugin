@@ -52,7 +52,7 @@ const i18nConfig = {
   },
 };
 ```
-### 使用语言
+### 切换语言
 ```
 // 页面入口 app.js
 const en_US = require("./i18n/en_US"); // 对应语言包
