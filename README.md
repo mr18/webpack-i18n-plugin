@@ -1,6 +1,6 @@
 # 中文国际化插件，适用于 vue，react
 
-[DEMO](./demo)
+### [DEMO](./demo)
 
 ### 安装
 
