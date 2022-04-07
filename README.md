@@ -7,14 +7,8 @@
 ```
 npm install webpack-i18n-plugin -D
 ```
-### 切换语言
-```
-// 页面入口 app.js
-const en_US = require("./i18n/en_US"); // 对应语言包
-window.$i8n.locale(en_US); // $i18n为全局变量
-```
 
-> 为了兼容 vue 和 react，需要同时配置 webpack plugins 和 babel plugins
+为了兼容 vue 和 react，需要同时配置 webpack plugins 和 babel plugins
 
 ### webpack plugins 配置
 
@@ -58,7 +52,12 @@ const i18nConfig = {
   },
 };
 ```
-
+### 使用语言
+```
+// 页面入口 app.js
+const en_US = require("./i18n/en_US"); // 对应语言包
+window.$i8n.locale(en_US); // $i18n为全局变量
+```
 ### 备注
 
 1. 编译结果暴露 `$i8n` `$$i8n` 全局方法
