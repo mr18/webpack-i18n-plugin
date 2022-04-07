@@ -20,7 +20,6 @@ function genConfigFile(opt) {
     oldKeysMap = {};
   let localeFilePath = path.resolve(options.i18nDir, "./zh_CN/index.js");
   if (fs.existsSync(localeFilePath)) {
-    hasLocalFlie = true;
     oldKeysMap = require(localeFilePath);
   }
   let oldKeysMapKeys = Object.keys(oldKeysMap);
