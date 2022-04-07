@@ -11,7 +11,7 @@ const OPTIONS = require("./options");
  */
 
 const genUuidKey = function (value, prefixKey) {
-  let valArr = (value || "").split("");
+  let valArr = (value || "").trim().split("");
   let code = 0;
   let total = 0;
   valArr.forEach((val, index) => {
@@ -57,7 +57,7 @@ let I18N_MAP = {};
  * @param value
  */
 const collectKeys = function (uuidKey, value) {
-  value = value || "";
+  value = (value || "").trim();
   if (I18N_MAP[uuidKey] && value && I18N_MAP[uuidKey] !== value) {
     myOra.warn("存在重复的key：" + uuidKey + " ---> " + I18N_MAP[uuidKey] + " ---> " + value);
     myOra.succeed(' > 请给其中之一添加自定义key值，example：$i8n("key","' + value + '")');
@@ -155,7 +155,7 @@ module.exports.getCallExpressionName = function (node) {
  * @returns {*}
  */
 module.exports.genAIExpression = function (value, isExpression, key) {
-  value = value || "";
+  value = (value || "").trim();
   let valStr = value.replace(/'/g, '"').replace(/(\n)/g, "\\n");
   key = key || genUuidKey(value);
   collectKeys(key, value);
