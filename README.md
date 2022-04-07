@@ -56,11 +56,12 @@ const i18nConfig = {
 };
 ```
 ### 切换语言
-中文无需加载语言包
+确保语言包最先加载到页面中，中文无需引入语言包
 ```
 // 页面入口 app.js
 const en_US = require("./i18n/en_US"); // 对应语言包
 window.$i8n.locale(en_US); // $i18n为全局变量
+// other code
 ```
 ### 备注
 
