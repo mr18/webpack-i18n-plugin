@@ -17,8 +17,7 @@ function genConfigFile(opt) {
   };
   myOra.info("国际化配置生成中...");
   let i18nMap = babelUtils.getI18nMap(),
-    oldKeysMap = {},
-    hasLocalFlie = false;
+    oldKeysMap = {};
   let localeFilePath = path.resolve(options.i18nDir, "./zh_CN/index.js");
   if (fs.existsSync(localeFilePath)) {
     hasLocalFlie = true;
@@ -47,7 +46,7 @@ function genConfigFile(opt) {
   let localeCode = "module.exports = " + JSON.stringify(sortKeysMap);
   utils.writeFile(path.resolve(options.i18nDir, "./zh_CN/index.js"), localeCode);
 
-  translate(options, hasLocalFlie ? oldKeysMap : sortKeysMap);
+  translate(options,sortKeysMap);
 }
 
 /**
