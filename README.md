@@ -10,7 +10,7 @@ npm install webpack-i18n-plugin -D
 ### 切换语言
 ```
 // 页面入口 app.js
-const en_US = require("../i18n/en_US"); // 对应语言包
+const en_US = require("./i18n/en_US"); // 对应语言包
 $i18n.locale(en_US);
 ```
 
