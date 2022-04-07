@@ -19,7 +19,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.6.10",
-    "webpack-i18n-plugin": "^0.8.3"
+    "webpack-i18n-plugin": "^0.9.4"
   },
   "eslintConfig": {
     "root": true,
