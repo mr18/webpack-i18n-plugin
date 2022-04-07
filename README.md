@@ -53,6 +53,7 @@ const i18nConfig = {
 };
 ```
 ### 切换语言
+中文无需加载语言包
 ```
 // 页面入口 app.js
 const en_US = require("./i18n/en_US"); // 对应语言包
