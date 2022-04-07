@@ -3,7 +3,7 @@ const path = require('path');
 const XLSX = require('xlsx');
 const ora = require('ora');
 const myOra = ora();
-const del = require('del');
+
 /**
  *
  * @param filePath
