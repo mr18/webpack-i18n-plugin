@@ -9,6 +9,10 @@ class i18nPlugin {
     this.i18nConfig = config;
   }
   apply(compiler) {
+    
+    // 编译之前删除缓存，避免读取缓存数据
+    collector.utils.deleteCacheFolder();
+    
     let entries = compiler.options.entry;
     let newEntries = {};
 
