@@ -11,7 +11,7 @@ npm install webpack-i18n-plugin -D
 ```
 // 页面入口 app.js
 const en_US = require("./i18n/en_US"); // 对应语言包
-window.$i18n.locale(en_US); // $i18n为全局变量
+window.$i8n.locale(en_US); // $i18n为全局变量
 ```
 
 > 为了兼容 vue 和 react，需要同时配置 webpack plugins 和 babel plugins
