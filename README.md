@@ -13,20 +13,23 @@ npm install webpack-i18n-plugin -D
 ### webpack plugins 配置
 
 ```
-const i18nPlugin = require("webpack-i18n-plugin");
-
 // webpack.config.js
+const i18nPlugin = require("webpack-i18n-plugin");
 plugins: [
   ...
   new i18nPlugin(i18nConfig),
   ...
 ]
-
+```
+```
 // vue.config.js
 chainWebpack: (config) => {
-  config.plugin("i18n").use(i18nPlugin).tap((options) => {
-    return [...options, i18nConfig];
-  });
+  config
+    .plugin('i18n')
+    .use('webpack-i18n-plugin')
+    .tap(() => {
+      return [i18nConfig];
+    });
 }
 ```
 
