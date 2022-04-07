@@ -10,7 +10,7 @@ npm install webpack-i18n-plugin -D
 ### 切换语言
 ```
 // 页面入口
-import en_US from "./i18n/en_US";
+import en_US from "./i18n/en_US"; // 对应语言包路径
 $i18n.locale(en_US);
 ```
 
