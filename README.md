@@ -63,6 +63,9 @@ const en_US = require("./i18n/en_US"); // 对应语言包
 window.$i8n.locale(en_US); // $i18n为全局变量
 // other code
 ```
+
+![image](https://user-images.githubusercontent.com/4214624/163085998-b4777b96-bd64-4680-92cc-d27fff4e3082.png)
+
 ### 备注
 
 1. 编译结果暴露 `$i8n` `$$i8n` 全局方法
