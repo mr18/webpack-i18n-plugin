@@ -55,6 +55,7 @@ const i18nConfig = {
   },
 };
 ```
+[翻译文件格式参考](https://github.com/mr18/webpack-i18n-plugin/blob/master/demo/react/output/en_US/%E7%BF%BB%E8%AF%91%E5%86%85%E5%AE%B9.xlsx)
 ### 切换语言
 确保语言包最先加载到页面中，中文无需引入语言包
 ```
