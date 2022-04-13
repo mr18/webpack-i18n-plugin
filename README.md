@@ -70,6 +70,8 @@ window.$i8n.locale(en_US); // $i18n为全局变量
 2. 编译后，关注`build`输出日志，直到无待翻译数据
 3. 如果语言包无法更新，清理node_modules/.cache后重新编译
 
+欢迎fork，提交issues.
+
 ### License
 
 [MIT License](./LICENSE).
