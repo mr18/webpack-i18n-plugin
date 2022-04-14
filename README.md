@@ -75,7 +75,8 @@ window.$i8n.locale(en_US); // $i18n为全局变量
 欢迎fork，提交issues.
 
 如果有帮助到您，并支持我的工作可以扫码
-![566046207b543a61779cd274538f7ad](https://user-images.githubusercontent.com/4214624/163312395-be1aedc1-6a49-4aae-a110-5d2155844750.jpg)
+
+![566046207b543a61779cd274538f7ad](https://user-images.githubusercontent.com/4214624/163312395-be1aedc1-6a49-4aae-a110-5d2155844750.jpg =100x100)
 
 
 
