@@ -60,6 +60,7 @@ class i18nPlugin {
     }
 
     // 收集国际化信息，并生成对应的文件
+    let versionRe = /\$\{i18n_locale_language_version\}/g;
     compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
       collector(this.i18nConfig);
 
@@ -69,8 +70,8 @@ class i18nPlugin {
       Object.keys(compilation.assets).forEach((assetName) => {
         if (/\.js$/.test(assetName)) {
           let content = compilation.assets[assetName].source();
-          if (typeof content === "string") {
-            content = content.replace(/\$\{i18n_locale_language_version\}/g, version);
+          if (typeof content === "string" && versionRe.test(content)) {
+            content = content.replace(versionRe, version);
             compilation.assets[assetName] = new ConcatSource(content);
           }
         }
