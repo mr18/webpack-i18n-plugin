@@ -27,19 +27,6 @@ const genUuidKey = function (value, prefixKey) {
 };
 module.exports.genUuidKey = genUuidKey;
 
-const genUuidKey2 = function (value, prefixKey) {
-  let hash = 0;
-  value = (value || "").trim();
-  for (var i = 0, length = value.length; i < length; i++) {
-    chr   = value.charCodeAt(i);
-    hash  = ((hash << 5) + hash) + chr;
-    hash |= 0; // Convert to 32bit integer
-  }
-  let uniqueKey = parseInt(hash).toString(36);
-  return (prefixKey || "") + uniqueKey;
-};
-module.exports.genUuidKey2 = genUuidKey2;
-
 /**
  *
  * @param val
