@@ -4,25 +4,27 @@ const myOra = ora();
 const OPTIONS = require("./options");
 
 /**
- *
+ * hash函数，生成唯一的id
  * @param value
  * @param prefixKey
  * @returns {string}
  */
+const probability = 100000000;
+
+// key有重复的可能性，概率极小，目前测试结果约为万分之1（probability/1000）
+// 提高probability可降低重复的概率，相应uniqueKey的长度也会随之增加
 
 const genUuidKey = function (value, prefixKey) {
-  let valArr = (value || "").trim().split("");
-  let code = 0;
-  let total = 0;
-  valArr.forEach((val, index) => {
-    let v = val.charCodeAt();
-    total += v;
-    code += Math.log10(v) * (index + 1);
-  });
-  // key存在重复的可能，概率极小
-  code *= 100000000;
-  code += value.length + total;
+  value = (value || "").trim();
+  let code = 0, total = 0;
+  for (let index = 0, length = value.length; index < length; index++) {
+    let val = value.charCodeAt(index);
+    total += val;
+    code += Math.log10(val) * (index + 1);
+  }
+  code = code * probability + value.length + total;
   let uniqueKey = parseInt(code).toString(36);
+  
   return (prefixKey || "") + uniqueKey;
 };
 module.exports.genUuidKey = genUuidKey;
