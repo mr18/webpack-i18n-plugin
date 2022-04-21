@@ -22,22 +22,7 @@ module.exports.StringLiteral = function (path) {
         let newNode = types.JSXExpressionContainer(expression);
         path.replaceWith(newNode);
       } else if (types.isObjectProperty(parentNode)) {
-        let parentObjNode = babelUtils.findPropertyParent(path);
-        let addKey = utils.genPropertyKey(parentNode.key.name || parentNode.key.value);
-        let keyValue = "";
-
-        if (parentObjNode && parentObjNode.node) {
-          let keyNode = babelUtils.getKeyProperty(parentObjNode.node.properties, addKey);
-
-          if (keyNode) {
-            keyValue = keyNode.value.value;
-          }
-        }
-
-        if (!keyValue) {
-          keyValue = utils.genUuidKey(node.value);
-        }
-
+        let keyValue = utils.genUuidKey(node.value);
         let replaceNode = babelUtils.genAIExpression(value, true, keyValue);
         path.replaceWith(replaceNode);
       } else {
