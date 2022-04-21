@@ -44,20 +44,6 @@ plugins:[
 ]
 ```
 
-### 插件配置项
-[翻译文件格式参考](https://github.com/mr18/webpack-i18n-plugin/blob/master/demo/react/output/en_US/%E7%BF%BB%E8%AF%91%E5%86%85%E5%AE%B9.xlsx)
-
-```
-const i18nConfig = {
-  i18nDir: path.resolve(__dirname, "./i18n"), //国际化目录（可选）
-  makefile: true, // 默认 是否需要重新生成翻译文件，（可选）
-  translation: {
-    en_US: [path.resolve(__dirname, "翻译文件.xlsx")], //en_US语言包
-    ...
-  },
-};
-``` 
-
 ### 切换语言
 
 确保语言包最先加载到页面中，中文无需引入语言包
