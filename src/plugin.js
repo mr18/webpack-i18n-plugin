@@ -62,7 +62,9 @@ class i18nPlugin {
     // 收集国际化信息，并生成对应的文件
     let versionRe = /\$\{i18n_locale_language_version\}/g;
     compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
-      collector(this.i18nConfig);
+      if (this.i18nConfig.makefile !== false) {
+        collector(this.i18nConfig);
+      }
 
       // 生成国际化版本号，适用于语言包缓存等
       let i18nMap = i18nUtils.getI18nMap();
@@ -79,7 +81,9 @@ class i18nPlugin {
     });
     // 输出国际化结果信息
     compiler.hooks.done.tap("i18nPlugin", (stats) => {
-      collector.utils.printUndo(this.i18nConfig);
+      if (this.i18nConfig.makefile !== false) {
+        collector.utils.printUndo(this.i18nConfig);
+      }
     });
   }
 }
