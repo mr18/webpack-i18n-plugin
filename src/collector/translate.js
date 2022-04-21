@@ -3,7 +3,7 @@ const XLSX = require("xlsx");
 const path = require("path");
 const ora = require("ora");
 const myOra = ora();
-
+const fs = require("fs");
 /**
  *
  * @param options
@@ -56,9 +56,15 @@ module.exports = function translate(options, oldKeysMap) {
           jsonData[key] = oldKeysMap[key];
         }
       });
-      let localeCode = "module.exports = " + JSON.stringify(localeResult);
-      let tranPath = path.resolve(options.i18nDir, "./" + tranKey + "/index.js");
-      utils.writeFile(tranPath, localeCode);
+      let outputJsPath = path.resolve(options.i18nDir, "./" + tranKey + "/index.js");
+      let oldLocaleResult;
+      if (fs.existsSync(outputJsPath)) {
+        oldLocaleResult = require(outputJsPath);
+      }
+      if (!oldLocaleResult || JSON.stringify(oldLocaleResult) !== JSON.stringify(localeResult)) {
+        let localeCode = "module.exports = " + JSON.stringify(localeResult);
+        utils.writeFile(outputJsPath, localeCode);
+      }
 
       let outputXlsxPath = path.resolve(options.i18nDir, "./" + tranKey + "/待翻译.xlsx");
       if (xlsxData.length) {
