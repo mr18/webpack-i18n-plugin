@@ -75,7 +75,7 @@ window.$i8n.locale(en_US); // $i18n为全局变量
 | ----------- | --------------------------------------------------------------- | --------- | ---- | ------ |
 | i18nDir     | 国际化输出目录                                                  | `String`  | 否   | `i18n` |
 | makefile    | 是否输出国际化内容<br/>国际化内容不发生变化时，可设置为 `false` | `Boolean` | 否   | `true`   |
-| translation | 对应的翻译语言                                                  | `Object`  | 是   | -      |
+| translation | 对应语言的翻译内容                                                  | `Object`  | 是   | -      |
 
 示例
 
@@ -83,6 +83,8 @@ window.$i8n.locale(en_US); // $i18n为全局变量
 const i18nConfig = {
   translation: {
     en_US: [path.resolve(__dirname, "翻译文件.xlsx")], //en_US语言包
+    ja_JP:'',
+    ...
   },
 };
 ```
