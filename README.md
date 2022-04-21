@@ -50,12 +50,17 @@ plugins:[
 ```
 const i18nConfig = {
   i18nDir: path.resolve(__dirname, "./i18n"), //国际化目录（可选）
+  makefile: true, // 默认 是否需要重新生成翻译文件，（可选）
   translation: {
     en_US: [path.resolve(__dirname, "翻译文件.xlsx")], //en_US语言包
     ...
   },
 };
 ```
+配置项
+|---|---|---|---|
+|名称|描述|必选|默认值
+
 
 ### 切换语言
 确保语言包最先加载到页面中，中文无需引入语言包
