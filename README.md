@@ -44,7 +44,7 @@ plugins:[
 ]
 ```
 
-### 插件配置项`i18nConfig`
+### 插件配置项
 [翻译文件格式参考](https://github.com/mr18/webpack-i18n-plugin/blob/master/demo/react/output/en_US/%E7%BF%BB%E8%AF%91%E5%86%85%E5%AE%B9.xlsx)
 
 ```
@@ -56,14 +56,12 @@ const i18nConfig = {
     ...
   },
 };
-```
-配置项
-|---|---|---|---|
-|名称|描述|必选|默认值
-
+``` 
 
 ### 切换语言
+
 确保语言包最先加载到页面中，中文无需引入语言包
+
 ```
 // 页面入口 app.js
 const en_US = require("./i18n/en_US"); // 对应语言包
@@ -71,6 +69,25 @@ window.$i8n.locale(en_US); // $i18n为全局变量
 // other code
 ```
 
+### 插件配置项 `Object`
+
+| 名称        | 说明                                                            | 类型      | 必选 | 默认值 |
+| ----------- | --------------------------------------------------------------- | --------- | ---- | ------ |
+| i18nDir     | 国际化输出目录                                                  | `String`  | 否   | `i18n` |
+| makefile    | 是否输出国际化内容<br/>国际化内容不发生变化时，可设置为 `false` | `Boolean` | 否   | true   |
+| translation | 对应的翻译语言                                                  | `Object`  | 是   | -      |
+
+示例
+
+```
+const i18nConfig = {
+  translation: {
+    en_US: [path.resolve(__dirname, "翻译文件.xlsx")], //en_US语言包
+  },
+};
+```
+
+[翻译文件格式参考](https://github.com/mr18/webpack-i18n-plugin/blob/master/demo/react/output/en_US/%E7%BF%BB%E8%AF%91%E5%86%85%E5%AE%B9.xlsx)
 ### 备注
 
 1. 编译结果暴露 `$i8n` `$$i8n` 全局方法
