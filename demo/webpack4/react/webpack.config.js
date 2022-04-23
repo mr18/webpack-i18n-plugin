@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-// const i18nPlugin = require("webpack-i18n-plugin");
-const i18nPlugin = require("../../../index");
+// const WebpackI18nPlugin = require("webpack-i18n-plugin");
+const WebpackI18nPlugin = require("../../../index");
 const i18nConfig = require("./i18n.config");
 
 let entry = {
@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     // plugin 用于收集国际化信息
-    new i18nPlugin(i18nConfig),
+    new WebpackI18nPlugin(i18nConfig),
 
     new HtmlWebpackPlugin({
       title: "国际化",
