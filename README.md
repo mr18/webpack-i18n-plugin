@@ -14,10 +14,10 @@ npm install webpack-i18n-plugin -D
 
 ```
 // webpack.config.js
-const webpackI18nPlugin = require("webpack-i18n-plugin");
+const WebpackI18nPlugin = require("webpack-i18n-plugin");
 plugins: [
   ...
-  new webpackI18nPlugin(i18nConfig),
+  new WebpackI18nPlugin(i18nConfig),
   ...
 ]
 ```
