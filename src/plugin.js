@@ -4,7 +4,7 @@ const i18nUtils = require("./babel-plugin/utils");
 const ConcatSource = require("webpack-sources").ConcatSource;
 // const polyfilePath = require.resolve("./collector/polyfill.js");
 const polyfilePath = path.resolve(__dirname, "./collector/polyfill.mjs");
-class i18nPlugin {
+class webpackI18nPlugin {
   constructor(config) {
     this.i18nConfig = config;
   }
@@ -61,7 +61,7 @@ class i18nPlugin {
 
     // 收集国际化信息，并生成对应的文件
     let versionRe = /\$\{i18n_locale_language_version\}/g;
-    compiler.hooks.emit.tap("i18nPlugin", (compilation) => {
+    compiler.hooks.emit.tap("webpackI18nPlugin", (compilation) => {
       if (this.i18nConfig.makefile !== false) {
         collector(this.i18nConfig);
       }
@@ -80,11 +80,11 @@ class i18nPlugin {
       });
     });
     // 输出国际化结果信息
-    compiler.hooks.done.tap("i18nPlugin", (stats) => {
+    compiler.hooks.done.tap("webpackI18nPlugin", (stats) => {
       if (this.i18nConfig.makefile !== false) {
         collector.utils.printUndo(this.i18nConfig);
       }
     });
   }
 }
-module.exports = i18nPlugin;
+module.exports = webpackI18nPlugin;
